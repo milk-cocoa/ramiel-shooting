@@ -1,159 +1,77 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-<meta charset="UTF-8">
-<style>
-body {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	margin: 0;
-}
-.statuspanel{
-	background-color: rgba(0,0,0,0.7);
-	height: 128px;
-	width: 210px;
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-.bar_base {
-	color: #fff;
-	position: absolute;
-	left: 0px;
-	width: 200px;
-	height: 36px;
-	line-height: 36px;
-	background: #f03030;
-	padding: 0 0 0 10px;
-	font-weight: bold;
-	font-size: 12px;
-}
-.lifebar {
-	top: 0px;
-	background: #F78BA7;
-}
-.powerbar {
-	top: 36px;
-	background: #3A7DD1;
-}
-.detail {
-	position: absolute;
-	top: 80px;
-	left: 12px;
-	color: #fff;
-	font-size: 13px;	
-}
-.alives {
-	line-height: 56px;
-	font-size: 24px;
-	font-weight: bold;
-	color: #fff;
-	background-color: rgba(0,0,0,0.7);
-	height: 56px;
-	width: 128px;
-	position: absolute;
-	top: 0;
-	right: 0;
-	padding: 0 0 0 10px;
-}
-.loading {
-	position: absolute;
-	text-align: center;
-	top: 0px;
-	margin: 0 auto;
-	color: #fff;
-	font-size: 32px;
-	background: #333;
-	width: 100%;
-	height: 100%;
-}
-.hidden {
-	display: none;
-}
-.powerdby {
-	position: absolute;
-	right: 0%;
-	bottom: 0%;
-	color: #fff;
-	background-color: rgba(0,0,0,.7);
-	padding: 8px 18px;
-	margin:0;  
-	font-size: 12px;
-}
-.powerdby a {
-	color: #fff;
-}
-</style>
-<script type="text/goml">
-<goml>
-	<head>
-		<geo id="player" type="Sphere" param="3 3 3" />
-		<mtl id="player-mtl" type="MeshLambert" param="color: #55e;ambient: #55e;" />
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/goml">
+      <goml>
+        <head>
+          <geo id="player" type="Sphere" param="3 3 3" />
+          <mtl id="player-mtl" type="MeshLambert" param="color: #55e;ambient: #55e;" />
 
-		<geo id="bullet" type="Sphere" param="1 1 1" />
-		<mtl id="bullet-mtl" type="MeshLambert" param="color: #e55;ambient: #e55;" />
+          <geo id="bullet" type="Sphere" param="1 1 1" />
+          <mtl id="bullet-mtl" type="MeshLambert" param="color: #e55;ambient: #e55;" />
 
-		<geo id="sky" type="Sphere" param="200 64 64" />
-		<txr id="blueSky" src="data/img/sky.png" />
-		<mtl id="sky-mtl" type="MeshPhong" param="map: #blueSky; side: 1;"/>
+          <geo id="sky" type="Sphere" param="200 64 64" />
+          <txr id="blueSky" src="data/img/sky.png" />
+          <mtl id="sky-mtl" type="MeshPhong" param="map: #blueSky; side: 1;"/>
 
-		<geo type="Circle" param="200 64" />
-		<txr id="groundTxr" src="data/img/ground.jpg" param="repeat: 50; wrap: 0;" />
-		<mtl id="ground-mtl" type="MeshLambert" param="map: #groundTxr;"/>
+          <geo type="Circle" param="200 64" />
+          <txr id="groundTxr" src="data/img/ground.jpg" param="repeat: 50; wrap: 0;" />
+          <mtl id="ground-mtl" type="MeshLambert" param="map: #groundTxr;"/>
 
-		<rdr />
-	</head>
-	<body>
-		<scene>
+          <rdr />
+        </head>
+        <body>
+          <scene>
 
-			<!-- If you want to use the STL data, load jThree.STL.js and add <mesh geo="STLFile URL" mtl="css selector" /> -->
+            <!-- If you want to use the STL data, load jThree.STL.js and add <mesh geo="STLFile URL" mtl="css selector" /> -->
 
-			<obj style="rotateY: 1.57; position: 15 -35 -72;">
-				<mesh geo="#sky" mtl="#sky-mtl" />
-				<mesh geo="[type='Circle']" mtl="#ground-mtl" style="positionY: -.5; rotateX: -1.57;" />
+            <obj style="rotateY: 1.57; position: 15 -35 -72;">
+              <mesh geo="#sky" mtl="#sky-mtl" />
+              <mesh geo="[type='Circle']" mtl="#ground-mtl" style="positionY: -.5; rotateX: -1.57;" />
 
-			</obj>
+            </obj>
 
 
-			<light type="Amb" style="light-color: #f0f0f0;" />
-			<light type="Dir" style="light-color: #5a5a5a; position: 1 1 1;" />
-			<light type="Dir" style="light-color: #5a5a5a; position: -1 1 1;" />
+            <light type="Amb" style="light-color: #f0f0f0;" />
+            <light type="Dir" style="light-color: #5a5a5a; position: 1 1 1;" />
+            <light type="Dir" style="light-color: #5a5a5a; position: -1 1 1;" />
 
-			<camera style="position: 0 15 40; lookAtY: 15;"/>
-		</scene>
-	</body>
-</goml>
-</script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<script src="script/jThree.min.js"></script>
-<script src="plugin/ammo.js"></script>
-<script src="plugin/jThree.XFile.js"></script>
-<script src="plugin/jThree.Stats.js"></script>
-<script src="plugin/jThree.Trackball.js"></script>
-<script src="plugin/jThree.FlyView.js"></script>
-<script src="http://cdn.mlkcca.com/v0.2.8/milkcocoa.js"></script>
-<script src="js/fps.js"></script>
-</head>
-<body>
-	<div class="statuspanel">
-		<div id="lifebar" class="bar_base lifebar">HP</div>
-		<div id="powerbar" class="bar_base powerbar">MP</div>
-		<div class="detail">
-			カーソルキーとAWSDで移動<br>
-			スペースキーで弾を撃つ
-		</div>
-	</div>
-	<div id="alives" class="alives"></div>
-	<div class="loading">
-		Now Loading
-		<br>
-		milkcocoa×jThree
-		<br>
-		Sample
-	</div>
-	<div class="powerdby">
-		Powered by <a href="https://mlkcca.com" target="_blank">milkcocoa</a> and <a href="http://jthree.jp/" target="_blank">jThree</a>
-	</div>
-</body>
+            <camera style="position: 0 15 40; lookAtY: 15;"/>
+          </scene>
+        </body>
+      </goml>
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="script/jThree.min.js"></script>
+    <script src="plugin/ammo.js"></script>
+    <script src="plugin/jThree.XFile.js"></script>
+    <script src="plugin/jThree.Stats.js"></script>
+    <script src="plugin/jThree.Trackball.js"></script>
+    <script src="plugin/jThree.FlyView.js"></script>
+    <script src="http://cdn.mlkcca.com/v0.2.8/milkcocoa.js"></script>
+    <script src="js/fps.js"></script>
+  </head>
+  <body>
+    <div class="statuspanel">
+      <div id="lifebar" class="bar_base lifebar">HP</div>
+      <div id="powerbar" class="bar_base powerbar">MP</div>
+      <div class="detail">
+        カーソルキーとAWSDで移動<br>
+        スペースキーで弾を撃つ
+      </div>
+    </div>
+    <div id="alives" class="alives"></div>
+    <div class="loading">
+      Now Loading
+      <br>
+      milkcocoa×jThree
+      <br>
+      Sample
+    </div>
+    <div class="powerdby">
+      Powered by <a href="https://mlkcca.com" target="_blank">milkcocoa</a> and <a href="http://jthree.jp/" target="_blank">jThree</a>
+    </div>
+  </body>
 </html>

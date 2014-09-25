@@ -1,7 +1,7 @@
 {
   "name": "ramiel-shooting",
   "version": "0.0.1",
-  "description": "",
+  "description": "jThreeとmilkcocoaで5時間で動くようになったOSSシューティングゲーム",
   "main": "gulpfile.js",
   "dependencies": {
     "gulp": "~3.8.7",

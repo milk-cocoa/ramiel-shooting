@@ -52,7 +52,7 @@ jThree( function( j3 ) {//j3 === jThree
                 dec_hp(20);
                 if(Number($("#lifebar").width()) <= 0) {
                     is_gameOver = true;
-                    camera.gameover();
+                    camera.gameover(ds, player_id);
                     alert("HPが0になりました。");
                     location.href = "/";
                 }

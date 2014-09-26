@@ -38,7 +38,7 @@ Camera.prototype.broadcast = function(ds, player_id) {
     }
 }
 
-Camera.prototype.gameover = function() {
+Camera.prototype.gameover = function(ds, player_id) {
     ds.send({
         cmd : "gameover",
         player_id : player_id

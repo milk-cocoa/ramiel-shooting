@@ -1,5 +1,4 @@
-function Weapon(j3, opts) {
-    this.j3 = j3;
+function Weapon(opts) {
     this.weapon_id = new Date().getTime().toString(32);
     this.owner = opts.owner_id;
     this.size_coef = opts.size;
@@ -41,39 +40,14 @@ Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
             z : z
         }
     },function(e){
-        render_bullet(
-            e.value.bullet_id,
-            e.value.pos,
-            e.value.vec,
-            bullets
-        );
-        //発射確認
-        //console.log(e);
+        var args = {
+            bullet_id : e.value.bullet_id,
+            bullet_pos : e.value.pos,
+            bullet_vec : e.value.vec,
+            speed_coef : self.speed_coef,
+            range_coef : self.range_coef
+        }
+        var bullet = new Bullet(args);
+        bullet.render_bullet();
     });
-}
-
-function render_bullet(bullets_id, bullets_pos, bullets_vec, bullets){
-    /* この値が大きいと近くて遅い */
-    var speed_and_range = 1500/(self.speed_coef*self.range_coef);
-
-    /* この値が大きいと遠くまで届く */
-    var range = 2000*range_coefficient;
-
-    self.j3("scene").append('<obj id="'+id+'" style="rotateY: 1.57; position: 15 0 0;"><mesh geo="#bullet" mtl="#bullet-mtl" /></obj>');
-    self.j3("#" + id).css("position", [ pos.x, pos.y, pos.z]);
-    self.j3("#" + id).animate({
-        positionX : "+="+(vec.x),
-        positionY : "+="+(vec.y),
-        positionZ : "+="+(vec.z)
-    }, speed_and_range);
-
-    setTimeout(function() {
-        delete bullets[id];
-        j3("#" + id).remove();
-    }, range);
-    bullets[id] = {
-        pos : pos,
-        vec : vec,
-        elem : j3("#" + id)
-    };
 }

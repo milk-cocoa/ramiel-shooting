@@ -5,16 +5,14 @@ jThree( function( j3 ) {//j3 === jThree
     var ds_bullet = milkcocoa.dataStore("bullet");
     var speed = 3;
     var player_id = new Date().getTime().toString(36);
-    var myself = new Myself(j3, player_id);
+    var myself = new Myself(player_id);
     var players = {};
     players[player_id] = {};
     var bullets = {};
     var is_gameOver = false;
     var ioManager = new InputManager();
 
-    myself.initWeapon(j3);
-    // ioManager.setPlayer(players[e.value.player_id]);
-
+    myself.initWeapon();
     ioManager.on("shoot", function() {
         myself.shoot(ds_bullet);
     });

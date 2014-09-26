@@ -4,7 +4,10 @@ function GameManager(){
 GameManager.check_hit = function(is_gameOver, bullets, myself){
     if(is_gameOver) return;
     Object.keys(bullets).map(function(key) {
-        var bullet = bullets[key];
+
+
+
+				var bullet = bullets[key];
         var xx = myself.getElem().positionX() - bullet.elem.positionX();
         var yy = myself.getElem().positionY() - bullet.elem.positionY();
         var zz = myself.getElem().positionZ() - bullet.elem.positionZ();
@@ -14,7 +17,7 @@ GameManager.check_hit = function(is_gameOver, bullets, myself){
                 is_gameOver = true;
                 myself.gameover(ds, player_id);
                 alert("HPが0になりました。");
-                location.href = "/";
+                location.href = "/play.html";
             }
         }
     });

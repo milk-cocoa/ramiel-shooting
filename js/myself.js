@@ -1,6 +1,6 @@
-function Myself(j3, player_id) {
+function Myself(player_id) {
     this.player_id = player_id;
-    this.elem = j3( "camera" );
+    this.elem = jThree( "camera" );
     this.prev = {
         x : 0,
         y : 0,
@@ -50,14 +50,13 @@ Myself.prototype.shoot = function(ds_bullet) {
     this.weapon.fire(this, ds_bullet);
 }
 
-Myself.prototype.initWeapon = function(j3) {
+Myself.prototype.initWeapon = function() {
     var opts = {
         owner_id : this.player_id,
         damage : 10,
         speed : 1,
         range : 1
     };
-    var weapon  = new Weapon(j3, opts);
+    var weapon  = new Weapon(opts);
     this.weapon = weapon;
 }
-

@@ -4,6 +4,9 @@ function InputManager(player){
     self.moveY = 0;
     self.moveZ = 0;
     self.rotateY = 0;
+    self.listeners = {
+        shoot : []
+    }
 
     $( window ).keydown( function( e ) {
         switch( e.keyCode ) {
@@ -19,7 +22,7 @@ function InputManager(player){
 
             // case 82: /*R*/ speed += 1; break;
             // case 70: /*F*/ speed -= 1; break;
-        case 32: self.player.shoot(self.myself, self.ds_bullet);break;
+        case 32: self.emit_onshoot();break;
 
         }
     } ).keyup( function( e ) {
@@ -49,6 +52,16 @@ InputManager.prototype.getMoveVecor = function(speed){
 InputManager.prototype.getRot = function(delta){
 		console.log(this.myself.getElem());
     return this.myself.getElem().rotateY() + delta*this.rotateY/1500;
+}
+
+InputManager.prototype.on = function(event, cb){
+    this.listeners[event].push(cb);
+}
+
+InputManager.prototype.emit_onshoot = function(e){
+    this.listeners["shoot"].forEach(function(listener) {
+        listener(e);
+    });
 }
 
 InputManager.prototype.setMyself = function(myself){

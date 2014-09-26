@@ -43,18 +43,3 @@ Player.prototype.inc_mp = function(amount) {
     $("#powerbar").width(Number($("#powerbar").width()) + amount);
     return true;
 }
-
-Player.prototype.initWeapon = function(j3) {
-    var opts = {
-        owner_id : this.player_id,
-        damage : 10,
-        speed : 1,
-        range : 1
-    };
-    var weapon  = new Weapon(j3, opts);
-    this.weapon = weapon;
-}
-
-Player.prototype.shoot = function(myself, ds_bullet) {
-    this.weapon.fire(myself, ds_bullet);
-}

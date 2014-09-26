@@ -12,15 +12,20 @@ jThree( function( j3 ) {//j3 === jThree
     var is_gameOver = false;
     var ioManager = new InputManager();
 
-    // players[e.value.player_id].initWeapon(j3);
+    myself.initWeapon(j3);
     // ioManager.setPlayer(players[e.value.player_id]);
 
+    ioManager.on("shoot", function() {
+        myself.shoot(ds_bullet);
+    });
+
+    ioManager.setMyself(myself);
+    ioManager.setDS_Bullet(ds_bullet);
+
     j3( "rdr" ).update( function( delta ) {
-        ioManager.setMyself(myself);
-        ioManager.setDS_Bullet(ds_bullet);
         var moveSpeed = delta * speed / 100;
         var player_vec = ioManager.getMoveVecor(moveSpeed);
-				// ここがおかしい
+
         myself.getElem()
             .translate(player_vec.x, player_vec.y, player_vec.z)
             .rotateY(ioManager.getRot(delta));

@@ -11,6 +11,8 @@ jThree( function( j3 ) {//j3 === jThree
     var bullets = {};
     var is_gameOver = false;
 
+    DeviceUtil.init();
+    
     j3( "rdr" ).update( function( delta ) {
         var moveSpeed = delta * speed / 100;
         camera.getElem()

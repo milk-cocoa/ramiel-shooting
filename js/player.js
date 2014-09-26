@@ -1,7 +1,7 @@
-function Player(j3, id, x, y, z) {
-    j3( "scene" ).append('<obj id="'+id+'" style="rotateY: 1.57; position: 15 0 0;"><mesh geo="#player" mtl="#player-mtl" /></obj>');
-    this.id = id;
-    this.elem = j3("#" + id);
+function Player(j3, player_id, x, y, z) {
+    j3( "scene" ).append('<obj id="'+player_id+'" style="rotateY: 1.57; position: 15 0 0;"><mesh geo="#player" mtl="#player-mtl" /></obj>');
+    this.player_id = player_id;
+    this.elem = j3("#" + player_id);
     this.prev = {
         x : x,
         y : y,
@@ -44,21 +44,17 @@ Player.prototype.inc_mp = function(amount) {
     return true;
 }
 
-Player.shoot = function(camera, ds_bullet, player_id) {
-    Weapon.fire(camera, ds_bullet, player_id);
+Player.prototype.initWeapon = function(j3) {
+    var opts = {
+        owner_id : this.player_id,
+        damage : 10,
+        speed : 1,
+        range : 1
+    };
+    var weapon  = new Weapon(j3, opts);
+    this.weapon = weapon;
 }
 
-Player.prototype.initWeapon = function() {
-    var params = {
-        size : 1,
-        damage : 1,
-        speed : 1,
-        range : 1,
-        angle : 1,
-        amount : null,
-        span : null,
-        position : null,
-        expire : null
-    };
-    this.weapon = new Weapon(params);
+Player.prototype.shoot = function(camera, ds_bullet) {
+    this.weapon.fire(camera, ds_bullet);
 }

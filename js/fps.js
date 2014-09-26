@@ -4,18 +4,20 @@ jThree( function( j3 ) {//j3 === jThree
     var ds = milkcocoa.dataStore("sample");
     var ds_bullet = milkcocoa.dataStore("bullet");
     var speed = 3;
-    var camera = new Camera(j3);
-    var ioManager = new InputManager();
     var player_id = new Date().getTime().toString(36);
+    var camera = new Camera(j3, player_id);
     var players = {};
     players[player_id] = {};
     var bullets = {};
     var is_gameOver = false;
+    var ioManager = new InputManager();
+
+    // players[e.value.player_id].initWeapon(j3);
+    // ioManager.setPlayer(players[e.value.player_id]);
 
     j3( "rdr" ).update( function( delta ) {
         ioManager.setCamera(camera);
         ioManager.setDS_Bullet(ds_bullet);
-        ioManager.setPlayerID(player_id);
         var moveSpeed = delta * speed / 100;
         var player_vec = ioManager.getMoveVecor(moveSpeed);
         camera.getElem()
@@ -41,16 +43,6 @@ jThree( function( j3 ) {//j3 === jThree
             delete players[e.value.player_id];
             GameManager.update_alives();
         }
-    });
-
-    ds_bullet.on("send", function(e) {
-        EffectManager.render_bullet(
-            j3,
-            e.value.bullet_id,
-            e.value.pos,
-            e.value.vec,
-            bullets
-        );
     });
 
     $(window).on('beforeunload', function() {

@@ -1,4 +1,4 @@
-function InputManager(){
+function InputManager(player){
     var self = this;
     self.moveX = 0;
     self.moveY = 0;
@@ -19,7 +19,7 @@ function InputManager(){
 
             // case 82: /*R*/ speed += 1; break;
             // case 70: /*F*/ speed -= 1; break;
-        case 32: Player.shoot(self.camera, self.ds_bullet, self.player_id);break;
+        case 32: self.player.shoot(self.camera, self.ds_bullet);break;
 
         }
     } ).keyup( function( e ) {
@@ -58,15 +58,6 @@ InputManager.prototype.setDS_Bullet = function(ds_bullet){
     this.ds_bullet = ds_bullet;
 }
 
-InputManager.prototype.setPlayerID = function(player_id){
-    this.player_id = player_id;
+InputManager.prototype.setPlayer = function(player){
+    this.player = player;
 }
-
-
-
-
-
-
-
-
-

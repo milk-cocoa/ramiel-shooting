@@ -19,7 +19,7 @@ function InputManager(player){
 
             // case 82: /*R*/ speed += 1; break;
             // case 70: /*F*/ speed -= 1; break;
-        case 32: self.player.shoot(self.camera, self.ds_bullet);break;
+        case 32: self.player.shoot(self.myself, self.ds_bullet);break;
 
         }
     } ).keyup( function( e ) {
@@ -47,11 +47,11 @@ InputManager.prototype.getMoveVecor = function(speed){
 }
 
 InputManager.prototype.getRot = function(delta){
-    return this.camera.getElem().rotateY() + delta*this.rotateY/1500;
+    return this.myself.getElem().rotateY() + delta*this.rotateY/1500;
 }
 
-InputManager.prototype.setCamera = function(camera){
-    this.camera = camera;
+InputManager.prototype.setCamera = function(myself){
+    this.myself = myself;
 }
 
 InputManager.prototype.setDS_Bullet = function(ds_bullet){

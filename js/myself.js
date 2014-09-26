@@ -1,6 +1,6 @@
 function Myself(j3, player_id) {
     this.player_id = player_id;
-    this.elem = j3( "camera" );
+    this.elem = j3( "myself" );
     this.prev = {
         x : 0,
         y : 0,

@@ -5,7 +5,7 @@ jThree( function( j3 ) {//j3 === jThree
     var ds_bullet = milkcocoa.dataStore("bullet");
     var speed = 3;
     var player_id = new Date().getTime().toString(36);
-    var camera = new Camera(j3, player_id);
+    var myself = new Camera(j3, player_id);
     var players = {};
     players[player_id] = {};
     var bullets = {};
@@ -16,14 +16,14 @@ jThree( function( j3 ) {//j3 === jThree
     // ioManager.setPlayer(players[e.value.player_id]);
 
     j3( "rdr" ).update( function( delta ) {
-        ioManager.setCamera(camera);
+        ioManager.setCamera(myself);
         ioManager.setDS_Bullet(ds_bullet);
         var moveSpeed = delta * speed / 100;
         var player_vec = ioManager.getMoveVecor(moveSpeed);
-        camera.getElem()
+        myself.getElem()
             .translate(player_vec.x, player_vec.y, player_vec.z)
             .rotateY(ioManager.getRot(delta));
-        GameManager.check_hit(is_gameOver, bullets, camera);
+        GameManager.check_hit(is_gameOver, bullets, myself);
     });
 
     ViewManager.update_alives(players);
@@ -46,10 +46,10 @@ jThree( function( j3 ) {//j3 === jThree
     });
 
     $(window).on('beforeunload', function() {
-        camera.gameover();
+        myself.gameover();
     });
 
-    EffectManager.render_move(camera, ds, player_id);
+    EffectManager.render_move(myself, ds, player_id);
     EffectManager.natural_heal();
 
     $(".loading").addClass("hidden");

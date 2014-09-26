@@ -19,21 +19,21 @@ Weapon.prototype.getWeaponID = function(){
     return this.weapon_id;
 }
 
-Weapon.prototype.fire = function(camera, ds_bullet, player_id) {
+Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
     var self = this;
 
     if(!ViewManager.dec_mp(20)) return;
     var id = new Date().getTime().toString(32);
-    var x = -Math.cos(camera.getElem().rotateY() - Math.PI / 2) * 150;
+    var x = -Math.cos(myself.getElem().rotateY() - Math.PI / 2) * 150;
     var y = 0;
-    var z = Math.sin(camera.getElem().rotateY() - Math.PI / 2) * 150;
+    var z = Math.sin(myself.getElem().rotateY() - Math.PI / 2) * 150;
     ds_bullet.send({
         bullet_id : id,
         player_id : player_id,
         pos : {
-            x : camera.getElem().positionX() + x/20,
-            y : camera.getElem().positionY() + y/20,
-            z : camera.getElem().positionZ() + z/20
+            x : myself.getElem().positionX() + x/20,
+            y : myself.getElem().positionY() + y/20,
+            z : myself.getElem().positionZ() + z/20
         },
         vec : {
             x : x,

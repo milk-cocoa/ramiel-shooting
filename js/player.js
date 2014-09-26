@@ -55,6 +55,6 @@ Player.prototype.initWeapon = function(j3) {
     this.weapon = weapon;
 }
 
-Player.prototype.shoot = function(camera, ds_bullet) {
-    this.weapon.fire(camera, ds_bullet);
+Player.prototype.shoot = function(myself, ds_bullet) {
+    this.weapon.fire(myself, ds_bullet);
 }

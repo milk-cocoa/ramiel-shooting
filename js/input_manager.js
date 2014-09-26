@@ -4,6 +4,8 @@ function InputManager(){
     self.moveY = 0;
     self.moveZ = 0;
     self.rotateY = 0;
+    self.first = [];
+    self.rat = {};
 
     $( window ).keydown( function( e ) {
         switch( e.keyCode ) {
@@ -40,6 +42,24 @@ function InputManager(){
         }
 
     } );
+
+    if(DeviceUtil.isMobile()) {
+        window.addEventListener("deviceorientation", function( e ) {
+            self.init_orientation(e);
+            window.removeEventListener( "deviceorientation", arguments.callee, false );
+            window.addEventListener( "deviceorientation", function(e) {
+                self.rotateY = (e.alpha - self.first[0]) * -0.002;
+        }, false );
+        }, false );
+    }
+}
+
+InputManager.prototype.init_orientation = function(e){
+    this.first = [e.alpha, e.gamma, e.beta];
+}
+
+InputManager.prototype.update_orientation = function(e){
+    this.rotateY = e.webkitCompassHeading - this.first;
 }
 
 InputManager.prototype.getMoveVecor = function(speed){
@@ -61,9 +81,6 @@ InputManager.prototype.setDS_Bullet = function(ds_bullet){
 InputManager.prototype.setPlayerID = function(player_id){
     this.player_id = player_id;
 }
-
-
-
 
 
 

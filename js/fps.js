@@ -11,8 +11,6 @@ jThree( function( j3 ) {//j3 === jThree
     players[player_id] = {};
     var bullets = {};
     var is_gameOver = false;
-
-    DeviceUtil.init();
     
     j3( "rdr" ).update( function( delta ) {
         ioManager.setCamera(camera);

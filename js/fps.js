@@ -4,11 +4,11 @@ jThree( function( j3 ) {//j3 === jThree
     var ds = milkcocoa.dataStore("sample");
     var ds_bullet = milkcocoa.dataStore("bullet");
     var speed = 3;
+    var gameManager = new GameManager();
     var player_id = new Date().getTime().toString(36);
-    var myself = new Myself(player_id);
+    var myself = new Myself(gameManager, player_id);
     var players = {};
     players[player_id] = {};
-    var bullets = {};
     var is_gameOver = false;
     var ioManager = new InputManager();
 
@@ -18,7 +18,6 @@ jThree( function( j3 ) {//j3 === jThree
     });
 
     ioManager.setMyself(myself);
-    ioManager.setDS_Bullet(ds_bullet);
 
     var userManager = new UserManager(milkcocoa.dataStore("users"));
     var scoreManager = new ScoreManager(milkcocoa.dataStore("users"));
@@ -34,7 +33,7 @@ jThree( function( j3 ) {//j3 === jThree
         myself.getElem()
             .translate(player_vec.x, player_vec.y, player_vec.z)
             .rotateY(ioManager.getRot(delta));
-        GameManager.check_hit(is_gameOver, bullets, myself);
+        gameManager.check_hit(is_gameOver, myself);
     });
 
     ViewManager.update_alives(players);
@@ -55,6 +54,16 @@ jThree( function( j3 ) {//j3 === jThree
             GameManager.update_alives();
         }
     });
+    ds_bullet.on("send", function(e) {
+        var args = {
+            bullet_id : e.value.bullet_id,
+            bullet_pos : e.value.pos,
+            bullet_vec : e.value.vec,
+            weapon_id : e.value.weapon_id
+        }
+        gameManager.add_bullet(args).render_bullet();
+    });
+
 
     $(window).on('beforeunload', function() {
         myself.gameover();

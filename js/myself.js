@@ -1,4 +1,5 @@
-function Myself(player_id) {
+function Myself(gameManager, player_id) {
+    this.gameManager = gameManager;
     this.player_id = player_id;
     this.elem = jThree( "camera" );
     this.prev = {
@@ -57,6 +58,6 @@ Myself.prototype.initWeapon = function() {
         speed : 1,
         range : 1
     };
-    var weapon  = new Weapon(opts);
+    var weapon  = new Weapon(self.gameManager, opts);
     this.weapon = weapon;
 }

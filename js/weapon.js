@@ -1,4 +1,5 @@
-function Weapon(opts) {
+function Weapon(gameManager, opts) {
+    this.gameManager = gameManager;
     this.weapon_id = new Date().getTime().toString(32);
     this.owner = opts.owner_id;
     this.size_coef = opts.size;
@@ -29,6 +30,7 @@ Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
     ds_bullet.send({
         bullet_id : id,
         player_id : player_id,
+        weapon_id : "00001",
         pos : {
             x : myself.getElem().positionX() + x/20,
             y : myself.getElem().positionY() + y/20,
@@ -39,15 +41,5 @@ Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
             y : y,
             z : z
         }
-    },function(e){
-        var args = {
-            bullet_id : e.value.bullet_id,
-            bullet_pos : e.value.pos,
-            bullet_vec : e.value.vec,
-            speed_coef : self.speed_coef,
-            range_coef : self.range_coef
-        }
-        var bullet = new Bullet(args);
-        bullet.render_bullet();
     });
 }

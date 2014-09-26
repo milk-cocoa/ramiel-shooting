@@ -1,9 +1,18 @@
-function Bullet(args) {
+function Bullet(gameManager, args) {
+    this.gameManager = gameManager;
     this.bullet_id = args.bullet_id;
     this.bullet_pos = args.bullet_pos;
     this.bullet_vec = args.bullet_vec;
-    this.speed_coef = args.speed_coef;
-    this.range_coef = args.range_coef;
+    this.weapon_id = args.weapon_id;
+    if(this.weapon_id == "00001") {
+        this.speed_coef = 10;
+        this.range_coef = 1;
+    }
+    this.elem = null;
+}
+
+Bullet.prototype.get_id = function (){
+    return this.bullet_id;
 }
 
 Bullet.prototype.render_bullet = function (){
@@ -23,12 +32,9 @@ Bullet.prototype.render_bullet = function (){
     }, speed_and_range);
 
     setTimeout(function() {
-        delete bullets[id];
-        j3("#" + id).remove();
-    }, self.range);
-    bullets[id] = {
-        pos : self.bullet_pos,
-        vec : self.bullet_vec,
-        elem : jThree("#" + id)
-    };
+        self.gameManager.remove_bullet(self.get_id());
+        jThree("#" + self.get_id()).remove();
+    }, range);
+
+    self.elem = jThree("#" + self.get_id());
 }

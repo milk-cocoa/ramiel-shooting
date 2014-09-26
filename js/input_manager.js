@@ -87,10 +87,6 @@ InputManager.prototype.setMyself = function(myself){
     this.myself = myself;
 }
 
-InputManager.prototype.setDS_Bullet = function(ds_bullet){
-    this.ds_bullet = ds_bullet;
-}
-
 InputManager.prototype.setPlayer = function(player){
     this.player = player;
 }

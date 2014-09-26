@@ -11,7 +11,13 @@ jThree( function( j3 ) {//j3 === jThree
     players[player_id] = {};
     var bullets = {};
     var is_gameOver = false;
-    
+    var userManager = new UserManager(milkcocoa.dataStore("users"));
+    var scoreManager = new ScoreManager(milkcocoa.dataStore("users"));
+    userManager.init();
+    scoreManager.fetch(function(err, scores) {
+        console.log(scores);
+    });
+
     j3( "rdr" ).update( function( delta ) {
         ioManager.setCamera(camera);
         ioManager.setDS_Bullet(ds_bullet);

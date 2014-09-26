@@ -70,7 +70,6 @@ InputManager.prototype.getMoveVecor = function(speed){
 }
 
 InputManager.prototype.getRot = function(delta){
-		console.log(this.myself.getElem());
     return this.myself.getElem().rotateY() + delta*this.rotateY/1500;
 }
 

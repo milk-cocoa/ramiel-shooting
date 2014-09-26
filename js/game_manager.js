@@ -3,6 +3,16 @@ function GameManager(){
 }
 
 GameManager.prototype.add_bullet = function(args){
+    switch (args.weapon_id) {
+        case "00001":
+        args.speed_coef = 1;
+        args.range_coef = 1;
+        break;
+        case "00002":
+        args.speed_coef = 3;
+        args.range_coef = 3;
+        break;
+    }
     var bullet = new Bullet(this, args);
     this.bullets[bullet.get_id()] = bullet;
     return bullet;
@@ -16,7 +26,7 @@ GameManager.prototype.check_hit = function(is_gameOver, myself){
     var self = this;
     if(is_gameOver) return;
     Object.keys(self.bullets).map(function(key) {
-		var bullet = self.bullets[key];
+    var bullet = self.bullets[key];
         var xx = myself.getElem().positionX() - bullet.elem.positionX();
         var yy = myself.getElem().positionY() - bullet.elem.positionY();
         var zz = myself.getElem().positionZ() - bullet.elem.positionZ();
@@ -31,4 +41,3 @@ GameManager.prototype.check_hit = function(is_gameOver, myself){
         }
     });
 }
-

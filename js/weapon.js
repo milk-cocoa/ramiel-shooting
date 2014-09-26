@@ -23,12 +23,12 @@ Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
     var self = this;
 
     if(!ViewManager.dec_mp(20)) return;
-    var id = new Date().getTime().toString(32);
+    var bullet_id = new Date().getTime().toString(32);
     var x = -Math.cos(myself.getElem().rotateY() - Math.PI / 2) * 150;
     var y = 0;
     var z = Math.sin(myself.getElem().rotateY() - Math.PI / 2) * 150;
     ds_bullet.send({
-        bullet_id : id,
+        bullet_id : bullet_id,
         player_id : player_id,
         weapon_id : "00001",
         pos : {

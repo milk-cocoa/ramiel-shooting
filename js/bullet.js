@@ -4,10 +4,8 @@ function Bullet(gameManager, args) {
     this.bullet_pos = args.bullet_pos;
     this.bullet_vec = args.bullet_vec;
     this.weapon_id = args.weapon_id;
-    if(this.weapon_id == "00001") {
-        this.speed_coef = 5;
-        this.range_coef = 1;
-    }
+    this.speed_coef = args.speed_coef;
+    this.range_coef = args.range_coef;
     this.elem = null;
 }
 

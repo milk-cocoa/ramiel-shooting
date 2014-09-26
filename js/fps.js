@@ -16,7 +16,7 @@ jThree( function( j3 ) {//j3 === jThree
         var moveSpeed = delta * speed / 100;
         var vec = ioManager.getMoveVecor(moveSpeed);
         camera.getElem()
-            .translate(vec.X, vec.Y, vec.Z)
+            .translate(vec.x, vec.y, vec.z)
             .rotateY(ioManager.getRot(camera, delta));
         GameManager.check_hit(is_gameOver, bullets, camera);
     });

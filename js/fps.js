@@ -22,6 +22,13 @@ jThree( function( j3 ) {//j3 === jThree
     ioManager.setMyself(myself);
     ioManager.setDS_Bullet(ds_bullet);
 
+    var userManager = new UserManager(milkcocoa.dataStore("users"));
+    var scoreManager = new ScoreManager(milkcocoa.dataStore("users"));
+    userManager.init();
+    scoreManager.fetch(function(err, scores) {
+        console.log(scores);
+    });
+
     j3( "rdr" ).update( function( delta ) {
         var moveSpeed = delta * speed / 100;
         var player_vec = ioManager.getMoveVecor(moveSpeed);

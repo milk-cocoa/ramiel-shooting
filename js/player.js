@@ -27,3 +27,38 @@ Player.prototype.vanish = function() {
         self.elem.remove();
     }, 500);
 }
+
+Player.prototype.dec_hp = function(amount) {
+    $("#lifebar").width(Number($("#lifebar").width()) - amount);
+}
+
+Player.prototype.dec_mp = function(amount) {
+    if(Number($("#powerbar").width()) < 20) return false;
+    $("#powerbar").width(Number($("#powerbar").width()) - amount);
+    return true;
+}
+
+Player.prototype.inc_mp = function(amount) {
+    if(Number($("#powerbar").width()) >= 200) return false;
+    $("#powerbar").width(Number($("#powerbar").width()) + amount);
+    return true;
+}
+
+Player.shoot = function(camera, ds_bullet, player_id) {
+    Weapon.fire(camera, ds_bullet, player_id);
+}
+
+Player.prototype.initWeapon = function() {
+    var params = {
+        size : 1,
+        damage : 1,
+        speed : 1,
+        range : 1,
+        angle : 1,
+        amount : null,
+        span : null,
+        position : null,
+        expire : null
+    };
+    this.weapon = new Weapon(params);
+}

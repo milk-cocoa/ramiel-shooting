@@ -24,7 +24,7 @@ GameManager.prototype.check_hit = function(is_gameOver, myself){
             ViewManager.dec_hp(20);
             if(Number($("#lifebar").width()) <= 0) {
                 is_gameOver = true;
-                myself.gameover(ds, player_id);
+                myself.gameover();
                 alert("HPが0になりました。");
                 location.href = "/play.html";
             }

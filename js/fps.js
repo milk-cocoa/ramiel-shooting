@@ -13,6 +13,8 @@ jThree( function( j3 ) {//j3 === jThree
     var ioManager = new InputManager();
 
     myself.initWeapon();
+    myself.setDataStore(ds);
+    
     ioManager.on("shoot", function() {
         myself.shoot(ds_bullet);
     });

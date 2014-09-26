@@ -10,6 +10,10 @@ function Myself(gameManager, player_id) {
     this.elem.css("position", [100 - Math.random() * 200, -25, 100  - Math.random() * 50]);
 }
 
+Myself.prototype.setDataStore = function(ds) {
+    this.ds = ds;
+}
+
 Myself.prototype.getElem = function() {
     return this.elem;
 }
@@ -40,10 +44,10 @@ Myself.prototype.broadcast = function(ds, player_id) {
     }
 }
 
-Myself.prototype.gameover = function(ds, player_id) {
-    ds.send({
+Myself.prototype.gameover = function() {
+    this.ds.send({
         cmd : "gameover",
-        player_id : player_id
+        player_id : this.player_id
     });
 }
 

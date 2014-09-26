@@ -44,8 +44,8 @@ Player.prototype.inc_mp = function(amount) {
     return true;
 }
 
-Player.prototype.shoot = function() {
-    this.weapon.fire();
+Player.shoot = function(camera, ds_bullet, player_id) {
+    Weapon.fire(camera, ds_bullet, player_id);
 }
 
 Player.prototype.initWeapon = function() {

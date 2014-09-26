@@ -19,7 +19,7 @@ function InputManager(){
 
             // case 82: /*R*/ speed += 1; break;
             // case 70: /*F*/ speed -= 1; break;
-        case 32: shooting();break;
+        case 32: Player.shoot(self.camera, self.ds_bullet, self.player_id);break;
 
         }
     } ).keyup( function( e ) {
@@ -46,6 +46,27 @@ InputManager.prototype.getMoveVecor = function(speed){
     return {x: speed*this.moveX, y: speed*this.moveY, z: speed*this.moveZ};
 }
 
-InputManager.prototype.getRot = function(camera, delta){
-    return camera.getElem().rotateY() + delta*this.rotateY/1500;
+InputManager.prototype.getRot = function(delta){
+    return this.camera.getElem().rotateY() + delta*this.rotateY/1500;
 }
+
+InputManager.prototype.setCamera = function(camera){
+    this.camera = camera;
+}
+
+InputManager.prototype.setDS_Bullet = function(ds_bullet){
+    this.ds_bullet = ds_bullet;
+}
+
+InputManager.prototype.setPlayerID = function(player_id){
+    this.player_id = player_id;
+}
+
+
+
+
+
+
+
+
+

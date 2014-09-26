@@ -13,8 +13,6 @@ jThree( function( j3 ) {//j3 === jThree
     var ioManager = new InputManager();
 
     myself.initWeapon();
-    myself.setDataStore(ds);
-    
     ioManager.on("shoot", function() {
         myself.shoot(ds_bullet);
     });
@@ -25,7 +23,7 @@ jThree( function( j3 ) {//j3 === jThree
     var scoreManager = new ScoreManager(milkcocoa.dataStore("users"));
     userManager.init();
     scoreManager.fetch(function(err, scores) {
-        console.log(scores);
+        //console.log(scores);
     });
 
     j3( "rdr" ).update( function( delta ) {
@@ -56,6 +54,8 @@ jThree( function( j3 ) {//j3 === jThree
             GameManager.update_alives();
         }
     });
+
+    /* 弾丸の発射後にレンダリングを命令:renderはbulletで */
     ds_bullet.on("send", function(e) {
         var args = {
             bullet_id : e.value.bullet_id,

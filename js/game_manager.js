@@ -9,8 +9,16 @@ GameManager.prototype.add_bullet = function(args){
         args.range_coef = 1;
         break;
         case "00002":
-        args.speed_coef = 3;
-        args.range_coef = 3;
+        args.speed_coef = 1.2;
+        args.range_coef = 1.2;
+        break;
+        case "00003":
+        args.speed_coef = 1.4;
+        args.range_coef = 1.4;
+        break;
+        case "00004":
+        args.speed_coef = 2;
+        args.range_coef = 2;
         break;
     }
     var bullet = new Bullet(this, args);
@@ -31,13 +39,14 @@ GameManager.prototype.check_hit = function(is_gameOver, myself){
         var yy = myself.getElem().positionY() - bullet.elem.positionY();
         var zz = myself.getElem().positionZ() - bullet.elem.positionZ();
         if(xx * xx + yy * yy + zz * zz < 20) {
-            ViewManager.dec_hp(20);
+            ViewManager.dec_hp(12);
             if(Number($("#lifebar").width()) <= 0) {
                 is_gameOver = true;
-                myself.gameover();
+                myself.gameover(ds, player_id);
                 alert("HPが0になりました。");
                 location.href = "/play.html";
             }
         }
     });
 }
+

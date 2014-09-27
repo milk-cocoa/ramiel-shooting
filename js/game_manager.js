@@ -3,24 +3,6 @@ function GameManager(){
 }
 
 GameManager.prototype.add_bullet = function(args){
-    switch (args.weapon_id) {
-        case "00001":
-        args.speed_coef = 1;
-        args.range_coef = 1;
-        break;
-        case "00002":
-        args.speed_coef = 1.2;
-        args.range_coef = 1.2;
-        break;
-        case "00003":
-        args.speed_coef = 1.4;
-        args.range_coef = 1.4;
-        break;
-        case "00004":
-        args.speed_coef = 2;
-        args.range_coef = 2;
-        break;
-    }
     var bullet = new Bullet(this, args);
     this.bullets[bullet.get_id()] = bullet;
     return bullet;

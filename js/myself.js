@@ -58,9 +58,6 @@ Myself.prototype.shoot = function(ds_bullet) {
 Myself.prototype.initWeapon = function() {
     var opts = {
         owner_id : this.player_id,
-        damage : 10,
-        speed : 1,
-        range : 1
     };
     var weapon  = new Weapon(self.gameManager, opts);
     this.weapon = weapon;

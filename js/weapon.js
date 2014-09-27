@@ -1,13 +1,6 @@
 function Weapon(gameManager, opts) {
     this.gameManager = gameManager;
     this.owner = opts.owner_id;
-    this.size_coef = opts.size;
-    this.damage_coef = opts.damage;
-    this.speed_coef = opts.speed;
-    this.range_coef = opts.range;
-    this.span_coef = opts.span;
-    this.angle = opts.angle;
-    this.amount = opts.amount;
 }
 
 Weapon.prototype.getOwnerID = function(){
@@ -18,7 +11,7 @@ Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
     var self = this;
 
     if(!ViewManager.dec_mp(13)) return;
-    var weapon_id = "00001";
+    var weapon_id = "00000";
 
     /* とりあえずhash値で武器選択 */
     var hash = decodeURI(location.hash.substr(1));

@@ -15,7 +15,7 @@ Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
 
     /* とりあえずhash値で武器選択 */
     var hash = decodeURI(location.hash.substr(1));
-    if (hash == "1" || hash == "2" || hash == "3" || hash == "4") {
+    if (hash == "1" || hash == "2" || hash == "3" || hash == "4" || hash == "5") {
         weapon_id = "0000" + hash;
     }
 

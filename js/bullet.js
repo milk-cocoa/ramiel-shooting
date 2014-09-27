@@ -40,6 +40,11 @@ Bullet.prototype.render_bullet = function (){
         range_coef = 10;
         speed_coef = 10;
         break;
+        case "00005":
+        bullet_shape = "100 100 100";
+        range_coef = 10;
+        speed_coef = 10;
+        break;
     }
 
     /* この値が大きいと近くて遅い */

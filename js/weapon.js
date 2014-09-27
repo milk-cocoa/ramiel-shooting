@@ -1,16 +1,22 @@
 function Weapon(gameManager, opts) {
     this.gameManager = gameManager;
-    this.owner = opts.owner_id;
 }
 
 Weapon.prototype.getOwnerID = function(){
     return this.owner_id;
 }
 
+Weapon.prototype.setOwner = function(owner_id){
+    this.owner = owner_id;
+}
+
 Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
+    // [TODO]
+    // このへんの武器決定処理を
+    // コンストラクタに持って行きたい
     var self = this;
 
-    if(!ViewManager.dec_mp(13)) return;
+    if(!ViewManager.dec_mp(10)) return;
     var weapon_id = "00000";
 
     /* とりあえずhash値で武器選択 */

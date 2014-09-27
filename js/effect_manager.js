@@ -1,9 +1,9 @@
 function EffectManager() {
 }
 
-EffectManager.render_move = function(myself, ds, player_id) {
+EffectManager.render_move = function(myself, player_id) {
     setInterval(function() {
-        myself.broadcast(ds, player_id);
+        myself.broadcast(player_id);
     }, 800);
 }
 

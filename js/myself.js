@@ -29,9 +29,9 @@ Myself.prototype.getDiff = function() {
     return xx * xx + yy * yy + zz * zz;
 }
 
-Myself.prototype.broadcast = function(ds, player_id) {
+Myself.prototype.broadcast = function(player_id) {
     if(this.getDiff() > 0) {
-        ds.send({
+        this.ds.send({
             cmd : "move",
             player_id : player_id,
             x : this.getElem().positionX(),

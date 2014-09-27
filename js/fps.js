@@ -1,12 +1,17 @@
+$(window).on('hashchange', function(){
+    location.reload();
+});
+
 jThree( function( j3 ) {//j3 === jThree
     var milkcocoa = new MilkCocoa("https://io-fi0i1mtqo.mlkcca.com:443");
     //io-li0guk7u1
     var ds = milkcocoa.dataStore("sample");
     var ds_bullet = milkcocoa.dataStore("bullet");
     var speed = 3;
-    var gameManager = new GameManager();
     var player_id = new Date().getTime().toString(36);
+    var gameManager = new GameManager(ds,player_id);
     var myself = new Myself(gameManager, player_id);
+    myself.setDataStore(ds);
     var players = {};
     players[player_id] = {};
     var is_gameOver = false;
@@ -63,15 +68,15 @@ jThree( function( j3 ) {//j3 === jThree
             bullet_vec : e.value.vec,
             weapon_id : e.value.weapon_id
         }
-        gameManager.add_bullet(args).render_bullet();
+        var bullet = gameManager.add_bullet(args);
+        bullet.render_bullet();
     });
-
 
     $(window).on('beforeunload', function() {
         myself.gameover();
     });
 
-    EffectManager.render_move(myself, ds, player_id);
+    EffectManager.render_move(myself, player_id);
     EffectManager.natural_heal();
 
     $(".loading").addClass("hidden");

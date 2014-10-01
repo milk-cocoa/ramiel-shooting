@@ -17,7 +17,7 @@ GameManager.prototype.remove_bullet = function(bullet_id){
 
 GameManager.prototype.check_hit = function(){
     var self = this;
-    if(is_gameOver) return;
+    if(self.is_gameover) return;
     Object.keys(self.bullets).map(function(key) {
         var bullet = self.bullets[key];
         var xx = self.myself.getElem().positionX() - bullet.elem.positionX();
@@ -26,7 +26,7 @@ GameManager.prototype.check_hit = function(){
         if(xx * xx + yy * yy + zz * zz < 20) {
             console.log("aaa");
             ViewManager.dec_hp(bullet.damage);
-            if(self.is_gameover == false && Number($("#lifebar").width()) <= 0) {
+            if(Number($("#lifebar").width()) <= 0) {
                 self.is_gameover = true;
                 self.myself.gameover(self.ds);
                 alert("HPが0になりました。");

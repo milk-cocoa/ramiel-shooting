@@ -12,9 +12,6 @@ jThree( function( j3 ) {//j3 === jThree
     var myself = new Myself(gameManager, player_id);
     var gameManager = new GameManager(ds, myself);
     myself.setDataStore(ds);
-    var players = {};
-    players[player_id] = {};
-    var is_gameOver = false;
     var ioManager = new InputManager();
 
     myself.initWeapon();
@@ -41,24 +38,16 @@ jThree( function( j3 ) {//j3 === jThree
         gameManager.check_hit();
     });
 
-    ViewManager.update_alives(players);
 
-    ds.on("send", function(e) {
-        if(e.value.cmd == "move") {
-            if(e.value.player_id != player_id) {
-                if(!players.hasOwnProperty(e.value.player_id)) {
-                    players[e.value.player_id] = new Player(j3, e.value.player_id, e.value.x, e.value.y, e.value.z);
-                    ViewManager.update_alives(players);
-                }
-                players[e.value.player_id]
-                    .setPos(e.value.x, e.value.y, e.value.z);
-            }
-        }else if(e.value.cmd == "gameover"){
-            players[e.value.player_id].vanish();
-            delete players[e.value.player_id];
-            GameManager.update_alives();
-        }
+    var player_manager = new PlayerManager(ds);
+    ViewManager.update_alives(player_manager.players);
+    player_manager.on("update", function(players) {
+        ViewManager.update_alives(players);
     });
+    player_manager.on("gameover", function(players) {
+        GameManager.update_alives(players);
+    });
+    player_manager.observe(player_id);
 
     /* 弾丸の発射後にレンダリングを命令:renderはbulletで */
     ds_bullet.on("send", function(e) {

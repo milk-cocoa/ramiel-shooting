@@ -1,7 +1,8 @@
-function GameManager(ds, player_id){
+function GameManager(ds, myself){
     this.bullets = {};
     this.ds = ds;
-    this.player_id = player_id;
+    this.myself = myself;
+    this.is_gameover = false;
 }
 
 GameManager.prototype.add_bullet = function(args){
@@ -14,19 +15,20 @@ GameManager.prototype.remove_bullet = function(bullet_id){
     delete this.bullets[bullet_id];
 }
 
-GameManager.prototype.check_hit = function(is_gameOver, myself){
+GameManager.prototype.check_hit = function(){
     var self = this;
     if(is_gameOver) return;
     Object.keys(self.bullets).map(function(key) {
-    var bullet = self.bullets[key];
-        var xx = myself.getElem().positionX() - bullet.elem.positionX();
-        var yy = myself.getElem().positionY() - bullet.elem.positionY();
-        var zz = myself.getElem().positionZ() - bullet.elem.positionZ();
+        var bullet = self.bullets[key];
+        var xx = self.myself.getElem().positionX() - bullet.elem.positionX();
+        var yy = self.myself.getElem().positionY() - bullet.elem.positionY();
+        var zz = self.myself.getElem().positionZ() - bullet.elem.positionZ();
         if(xx * xx + yy * yy + zz * zz < 20) {
+            console.log("aaa");
             ViewManager.dec_hp(bullet.damage);
-            if(Number($("#lifebar").width()) <= 0) {
-                is_gameOver = true;
-                myself.gameover(this.ds, self.player_id);
+            if(self.is_gameover == false && Number($("#lifebar").width()) <= 0) {
+                self.is_gameover = true;
+                self.myself.gameover(self.ds);
                 alert("HPが0になりました。");
                 location.href = "/play.html";
             }

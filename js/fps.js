@@ -9,8 +9,8 @@ jThree( function( j3 ) {//j3 === jThree
     var ds_bullet = milkcocoa.dataStore("bullet");
     var speed = 3;
     var player_id = new Date().getTime().toString(36);
-    var gameManager = new GameManager(ds,player_id);
     var myself = new Myself(gameManager, player_id);
+    var gameManager = new GameManager(ds, myself);
     myself.setDataStore(ds);
     var players = {};
     players[player_id] = {};
@@ -38,7 +38,7 @@ jThree( function( j3 ) {//j3 === jThree
         myself.getElem()
             .translate(player_vec.x, player_vec.y, player_vec.z)
             .rotateY(ioManager.getRot(delta));
-        gameManager.check_hit(is_gameOver, myself);
+        gameManager.check_hit();
     });
 
     ViewManager.update_alives(players);
@@ -76,7 +76,7 @@ jThree( function( j3 ) {//j3 === jThree
         myself.gameover();
     });
 
-    EffectManager.render_move(myself, player_id);
+    EffectManager.render_move(myself);
     EffectManager.natural_heal();
 
     $(".loading").addClass("hidden");

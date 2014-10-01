@@ -29,11 +29,12 @@ Myself.prototype.getDiff = function() {
     return xx * xx + yy * yy + zz * zz;
 }
 
-Myself.prototype.broadcast = function(player_id) {
+Myself.prototype.broadcast = function() {
+    var self = this;
     if(this.getDiff() > 0) {
         this.ds.send({
             cmd : "move",
-            player_id : player_id,
+            player_id : self.player_id,
             x : this.getElem().positionX(),
             y : this.getElem().positionY(),
             z : this.getElem().positionZ()

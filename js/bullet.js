@@ -5,6 +5,7 @@ function Bullet(gameManager, args) {
     this.bullet_vec = args.bullet_vec;
     this.weapon_id = args.weapon_id;
     this.elem = null;
+    this.damage = 10;
 }
 
 Bullet.prototype.get_id = function (){

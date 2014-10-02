@@ -1,6 +1,6 @@
 function Stage() {
-	var blocks = [];
-	this.init();
+    var blocks = [];
+    this.init();
 }
 
 Stage.BLOCK_SIZE = 4;

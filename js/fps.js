@@ -29,7 +29,7 @@ jThree( function( j3 ) {//j3 === jThree
     ioManager.on("rotate", function(rotateY) {
         myself.rotate(rotateY);
     });
-    
+
     ioManager.on("jump", function() {
         myself.jump();
         myself.broadcast("pos");

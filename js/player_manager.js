@@ -1,5 +1,5 @@
 function PlayerManager(ds) {
-	this.players = {};
+    this.players = {};
     this.listeners = {
         update : [],
         gameover : []

@@ -46,9 +46,11 @@ PlayerManager.prototype.observe = function(player_id) {
                     .setPos(e.value.x, e.value.y, e.value.z);
             }
         }else if(e.value.cmd == "gameover"){
-            self.players[e.value.player_id].vanish();
-            delete self.players[e.value.player_id];
-        	self.emit_ongameover(self.players);
+            if(self.players[e.value.player_id]) {
+                self.players[e.value.player_id].vanish();
+                delete self.players[e.value.player_id];
+                self.emit_ongameover(self.players);
+            }
         }
     });
 }

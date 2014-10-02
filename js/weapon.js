@@ -26,7 +26,7 @@ Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
         weapon_id = "0000" + hash;
     }
 
-    var bullet_id = new Date().getTime().toString(32);
+    var bullet_id = new Date().getTime().toString(36);
     var x = -Math.cos(myself.getElem().rotateY() - Math.PI / 2) * 150;
     var y = 0;
     var z = Math.sin(myself.getElem().rotateY() - Math.PI / 2) * 150;
@@ -39,7 +39,7 @@ Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
         /* vecで方向 */
         pos : {
             x : Math.floor(myself.getElem().positionX()),
-            y : Math.floor(myself.getElem().positionY()),
+            y : Math.floor(myself.getElem().positionY()) + 1,
             z : Math.floor(myself.getElem().positionZ())
         },
         vec : {

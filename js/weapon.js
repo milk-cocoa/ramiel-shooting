@@ -11,6 +11,14 @@ Weapon.prototype.addWeaponCount = function(){
     } else {
         this.weapon_count = 0;
     }
+    var weapon_names = [
+        '通常弾',
+        '強化弾',
+        '砲弾',
+        'ライフル弾',
+        '遠方機雷',
+        'マスタードガス'
+    ];
     switch(true){
     case this.weapon_count <= this.weapon_max:
         this.weapon_id = "0000" + this.weapon_count;
@@ -19,6 +27,7 @@ Weapon.prototype.addWeaponCount = function(){
         this.weapon_id = "00000";
         break;
     }
+    ViewManager.update_weapon(weapon_names[this.weapon_count]);
 }
 
 Weapon.prototype.fire = function(myself, ds_bullet) {

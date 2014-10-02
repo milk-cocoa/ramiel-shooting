@@ -54,7 +54,7 @@ Bullet.prototype.render_bullet = function (){
         self.damage = 10;
         self.range = 15;
         break;
-    case "00005": // poison fog
+    case "00005": // jaming
         range_coef = 10;
         speed_coef = 10;
         self.damage = 1;
@@ -71,7 +71,15 @@ Bullet.prototype.render_bullet = function (){
     /* この値が大きいと遠くまで届く */
     var range = 2000*range_coef;
 
-    jThree("scene").append('<obj id="'+self.bullet_id+'" style="rotateY: 0;"><mesh geo="#bullet'+this.weapon_id+'" mtl="#bullet-mtl" /></obj>');
+    if(this.weapon_id != "00005"){
+        jThree("scene").append('<obj id="'+self.bullet_id+'" style="rotateY: 0;"><mesh geo="#bullet'+this.weapon_id+'" mtl="#bullet-mtl" /></obj>');
+    } else {
+        //ジャミングエフェクト
+        //何故かundefinedな値をmtlに渡すとスケルトンになるので
+        //とりあえずそれで(ひどい)
+        var bullet_color_decoy;
+        jThree("scene").append('<obj id="'+self.bullet_id+'" style="rotateY: 0;"><mesh geo="#bullet'+this.weapon_id+'" mtl="#bullet-mtl' + bullet_color_decoy + '" /></obj>');
+    }
     jThree("#" + self.bullet_id).css("position", [ self.bullet_pos.x, self.bullet_pos.y, self.bullet_pos.z]);
     jThree("#" + self.bullet_id).animate({
         positionX : "+="+(self.bullet_vec.x),

@@ -33,6 +33,7 @@ Bullet.prototype.render_bullet = function (){
     var speed_coef = 1;
 
     self.damage = 10;
+    console.log(this.weapon_id);
     switch (this.weapon_id) {
         case "00001": // large gun
         bullet_shape = "3 3 3";
@@ -71,8 +72,7 @@ Bullet.prototype.render_bullet = function (){
     /* この値が大きいと遠くまで届く */
     var range = 2000*range_coef;
 
-    jThree("head").append('<geo id="bullet" type="Sphere" param="' + bullet_shape + '" />')
-    jThree("scene").append('<obj id="'+self.bullet_id+'" style="rotateY: 1.57; position: 15 0 0;"><mesh geo="#bullet" mtl="#bullet-mtl" /></obj>');
+    jThree("scene").append('<obj id="'+self.bullet_id+'" style="rotateY: 0;"><mesh geo="#bullet'+this.weapon_id+'" mtl="#bullet-mtl" /></obj>');
     jThree("#" + self.bullet_id).css("position", [ self.bullet_pos.x, self.bullet_pos.y, self.bullet_pos.z]);
     jThree("#" + self.bullet_id).animate({
         positionX : "+="+(self.bullet_vec.x),

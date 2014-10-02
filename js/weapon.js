@@ -18,7 +18,7 @@ Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
     var self = this;
 
     if(!ViewManager.dec_mp(10)) return;
-    var weapon_id = "00000";
+    var weapon_id = "00001";
 
     /* とりあえずhash値で武器選択 */
     var hash = decodeURI(location.hash.substr(1));

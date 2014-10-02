@@ -19,6 +19,9 @@ jThree( function( j3 ) {//j3 === jThree
     myself.initWeapon();
     ioManager.on("shoot", function() {
         myself.shoot(ds_bullet);
+    });
+
+    ioManager.on("keyup", function(vec) {
         myself.broadcast("pos");
     });
 

@@ -7,12 +7,11 @@ jThree( function( j3 ) {//j3 === jThree
     var stage = new Stage();
     stage.init();
     var player_id = new Date().getTime().toString(36);
-    var myself = new Myself(gameManager, player_id, stage);
+    var myself = new Myself(player_id, stage);
     var gameManager = new GameManager(ds, myself, stage);
     myself.setDataStore(ds);
     var ioManager = new InputManager();
 
-    myself.initWeapon();
     ioManager.on("shoot", function() {
         myself.shoot(ds_bullet);
     });
@@ -32,6 +31,13 @@ jThree( function( j3 ) {//j3 === jThree
     ioManager.on("jump", function() {
         myself.jump();
         myself.broadcast("pos");
+    });
+
+    weapon = new Weapon();
+    weapon.setOwnerID(player_id);
+    myself.initWeapon(weapon);
+    ioManager.on("weaponchange", function() {
+        weapon.addWeaponCount();
     });
 
     var userManager = new UserManager(milkcocoa.dataStore("users"));

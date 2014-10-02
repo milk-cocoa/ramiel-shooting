@@ -1,14 +1,30 @@
-function Weapon(gameManager, opts) {
-    this.gameManager = gameManager;
-    this.owner_id = opts.owner_id;
+function Weapon() {
+    this.weapon_count = 0;
+    this.weapon_max = 5;
 }
 
 Weapon.prototype.getOwnerID = function(){
     return this.owner_id;
 }
 
-Weapon.prototype.setOwner = function(owner_id){
+Weapon.prototype.setOwnerID = function(owner_id){
     this.owner = owner_id;
+}
+
+Weapon.prototype.getWeaponID = function(){
+    return this.weapon_id;
+}
+
+Weapon.prototype.setWeaponID = function(weapon_id){
+    this.weapon_id = weapon_id;
+}
+
+Weapon.prototype.addWeaponCount = function(){
+    if (this.weapon_count < this.weapon_max){
+        this.weapon_count += 1;
+    } else {
+        this.weapon_count = 0;
+    }
 }
 
 Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
@@ -18,12 +34,14 @@ Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
     var self = this;
 
     if(!ViewManager.dec_mp(10)) return;
-    var weapon_id = "00001";
 
-    /* とりあえずhash値で武器選択 */
-    var hash = decodeURI(location.hash.substr(1));
-    if (hash == "1" || hash == "2" || hash == "3" || hash == "4" || hash == "5") {
-        weapon_id = "0000" + hash;
+    switch(true){
+    case this.weapon_count <= this.weapon_max:
+        this.weapon_id = "0000" + this.weapon_count;
+        break;
+    default:
+        this.weapon_id = "00000";
+        break;
     }
 
     var bullet_id = new Date().getTime().toString(36);
@@ -34,7 +52,7 @@ Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
     ds_bullet.send({
         bullet_id : bullet_id,
         player_id : self.owner_id,
-        weapon_id : weapon_id,
+        weapon_id : this.weapon_id,
         /* posで開始位置 */
         /* vecで方向 */
         pos : {

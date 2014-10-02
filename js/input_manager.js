@@ -9,6 +9,7 @@ function InputManager(player){
         move : [],
         rotate : [],
         jump : [],
+        weaponchange : [],
         keyup : []
     }
     self.first = [];
@@ -46,7 +47,9 @@ function InputManager(player){
         case 38:
             self.emit_onjump();
             break;
-
+        case 40:
+            self.emit_onweaponchange();
+            break;
         }
     } ).keyup( function( e ) {
         switch( e.keyCode ) {
@@ -130,6 +133,12 @@ InputManager.prototype.emit_onshoot = function(e){
 
 InputManager.prototype.emit_onjump = function(e){
     this.listeners["jump"].forEach(function(listener) {
+        listener(e);
+    });
+}
+
+InputManager.prototype.emit_onweaponchange = function(e){
+    this.listeners["weaponchange"].forEach(function(listener) {
         listener(e);
     });
 }

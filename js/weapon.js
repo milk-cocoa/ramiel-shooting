@@ -1,14 +1,7 @@
-function Weapon() {
+function Weapon(player_id) {
+    this.player_id =player_id;
     this.weapon_count = 0;
     this.weapon_max = 5;
-}
-
-Weapon.prototype.getOwnerID = function(){
-    return this.owner_id;
-}
-
-Weapon.prototype.setOwnerID = function(owner_id){
-    this.owner = owner_id;
 }
 
 Weapon.prototype.getWeaponID = function(){
@@ -35,12 +28,10 @@ Weapon.prototype.addWeaponCount = function(){
     }
 }
 
-Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
+Weapon.prototype.fire = function(myself, ds_bullet) {
     var self = this;
 
     if(!ViewManager.dec_mp(10)) return;
-
-    // 弾を撃つと自分が食らうという致命的なバグがある
 
     var bullet_id = new Date().getTime().toString(36);
     var x = -Math.cos(myself.getElem().rotateY() - Math.PI / 2) * 150;
@@ -49,8 +40,8 @@ Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
 
     ds_bullet.send({
         bullet_id : bullet_id,
-        player_id : self.owner_id,
-        weapon_id : this.weapon_id,
+        player_id : this.player_id,
+        weapon_id : self.weapon_id,
         /* posで開始位置 */
         /* vecで方向 */
         pos : {

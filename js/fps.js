@@ -33,8 +33,7 @@ jThree( function( j3 ) {//j3 === jThree
         myself.broadcast("pos");
     });
 
-    weapon = new Weapon();
-    weapon.setOwnerID(player_id);
+    weapon = new Weapon(player_id);
     myself.initWeapon(weapon);
     ioManager.on("weaponchange", function() {
         weapon.addWeaponCount();
@@ -66,6 +65,7 @@ jThree( function( j3 ) {//j3 === jThree
 
     /* 弾丸の発射後にレンダリングを命令:renderはbulletで */
     ds_bullet.on("send", function(e) {
+        // gameManagerの当たり判定で使うユーザー情報などを登録
         var bullet = gameManager.add_bullet({
             bullet_id : e.value.bullet_id,
             player_id : e.value.player_id,

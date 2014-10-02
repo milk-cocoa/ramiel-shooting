@@ -17,7 +17,7 @@ Weapon.prototype.addWeaponCount = function(){
         '砲弾',
         'ライフル弾',
         '遠方機雷',
-        'ジャミングフィールドgi'
+        '遠方ジャミング'
     ];
     switch(true){
     case this.weapon_count <= this.weapon_max:

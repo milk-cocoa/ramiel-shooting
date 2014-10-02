@@ -2,14 +2,7 @@ function Weapon(player_id) {
     this.player_id =player_id;
     this.weapon_count = 0;
     this.weapon_max = 5;
-}
-
-Weapon.prototype.getWeaponID = function(){
-    return this.weapon_id;
-}
-
-Weapon.prototype.setWeaponID = function(weapon_id){
-    this.weapon_id = weapon_id;
+    this.weapon_id = "00000";
 }
 
 Weapon.prototype.addWeaponCount = function(){

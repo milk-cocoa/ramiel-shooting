@@ -11,7 +11,25 @@ function Myself(gameManager, player_id, stage) {
     this.vy = 0;
     this._is_onfloor = false;
     this._is_onfloor_counter = 0;
-    this.elem.css("position", [100 - Math.random() * 200, -30, 100  - Math.random() * 50]);
+    var points = [{
+        x : 10,
+        y : -30,
+        z : 10
+    }, {
+        x : 68,
+        y : -10,
+        z : 46
+    }, {
+        x : 87,
+        y : -30,
+        z : 38
+    }, {
+        x : 13,
+        y : -30,
+        z : 80
+    }];
+    var index = Math.floor(Math.random() * 100) % 2
+    this.elem.css("position", [points[index].x, points[index].y, points[index].z]);
 }
 
 
@@ -26,7 +44,7 @@ Myself.prototype.getElem = function() {
 Myself.prototype.update = function() {
     if(!this._is_onfloor) {
         this.vy -= 0.1;
-        if(this.vy < -1.2) this.vy = -1.2;
+        if(this.vy < -1.1) this.vy = -1.1;
     }
     if(this.stage.check_collision({x : this.elem.positionX(), y : this.elem.positionY() + this.vy, z : this.elem.positionZ()})) {
         this.elem.positionY(this.elem.positionY());
@@ -70,20 +88,30 @@ Myself.prototype.getDiff = function() {
     return xx * xx + yy * yy + zz * zz;
 }
 
-Myself.prototype.broadcast = function() {
+Myself.prototype.broadcast = function(type) {
     var self = this;
-    if(this.getDiff() > 0) {
+    if(type == "pos") {
         this.ds.send({
-            cmd : "move",
+            cmd : "pos",
             player_id : self.player_id,
             x : this.getElem().positionX(),
             y : this.getElem().positionY(),
             z : this.getElem().positionZ()
         });
-        this.prev.x = this.getElem().positionX();
-        this.prev.y = this.getElem().positionY();
-        this.prev.z = this.getElem().positionZ();
+    }else{
+        if(this.getDiff() > 0) {
+            this.ds.send({
+                cmd : "move",
+                player_id : self.player_id,
+                x : this.getElem().positionX(),
+                y : this.getElem().positionY(),
+                z : this.getElem().positionZ()
+            });
+        }
     }
+    this.prev.x = this.getElem().positionX();
+    this.prev.y = this.getElem().positionY();
+    this.prev.z = this.getElem().positionZ();
 }
 
 Myself.prototype.gameover = function() {
@@ -100,7 +128,7 @@ Myself.prototype.shoot = function(ds_bullet) {
 Myself.prototype.jump = function() {
     if(this._is_onfloor) {
         this._is_onfloor = false;
-        this.vy = 2.8;
+        this.vy = 1.6;
     }
 }
 

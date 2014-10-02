@@ -19,6 +19,7 @@ jThree( function( j3 ) {//j3 === jThree
     myself.initWeapon();
     ioManager.on("shoot", function() {
         myself.shoot(ds_bullet);
+        myself.broadcast("pos");
     });
 
     ioManager.on("move", function(vec) {
@@ -31,6 +32,7 @@ jThree( function( j3 ) {//j3 === jThree
     
     ioManager.on("jump", function() {
         myself.jump();
+        myself.broadcast("pos");
     });
 
     var userManager = new UserManager(milkcocoa.dataStore("users"));
@@ -53,19 +55,19 @@ jThree( function( j3 ) {//j3 === jThree
         ViewManager.update_alives(players);
     });
     player_manager.on("gameover", function(players) {
-        GameManager.update_alives(players);
+        ViewManager.update_alives(players);
     });
     player_manager.observe(player_id);
 
     /* 弾丸の発射後にレンダリングを命令:renderはbulletで */
     ds_bullet.on("send", function(e) {
-        var args = {
+        var bullet = gameManager.add_bullet({
             bullet_id : e.value.bullet_id,
+            player_id : e.value.player_id,
             bullet_pos : e.value.pos,
             bullet_vec : e.value.vec,
             weapon_id : e.value.weapon_id
-        }
-        var bullet = gameManager.add_bullet(args);
+        });
         bullet.render_bullet();
     });
     $(window).on('beforeunload', function() {

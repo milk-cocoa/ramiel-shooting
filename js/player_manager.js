@@ -34,6 +34,15 @@ PlayerManager.prototype.observe = function(player_id) {
                     self.emit_onupdate(self.players);
                 }
                 self.players[e.value.player_id]
+                    .setMove(e.value.x, e.value.y, e.value.z);
+            }
+        }else if(e.value.cmd == "pos") {
+            if(e.value.player_id != player_id) {
+                if(!self.players.hasOwnProperty(e.value.player_id)) {
+                    self.players[e.value.player_id] = new Player(jThree, e.value.player_id, e.value.x, e.value.y, e.value.z);
+                    self.emit_onupdate(self.players);
+                }
+                self.players[e.value.player_id]
                     .setPos(e.value.x, e.value.y, e.value.z);
             }
         }else if(e.value.cmd == "gameover"){

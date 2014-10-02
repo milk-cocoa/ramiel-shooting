@@ -10,6 +10,10 @@ function Player(j3, player_id, x, y, z) {
 }
 
 Player.prototype.setPos = function(x, y, z) {
+    this.elem.css("position", [ x, y, z ]);
+}
+
+Player.prototype.setMove = function(x, y, z) {
     var xx = x - this.prev.x;
     var yy = y - this.prev.y;
     var zz = z - this.prev.z;

@@ -1,6 +1,7 @@
 function Bullet(gameManager, args) {
     this.gameManager = gameManager;
     this.bullet_id = args.bullet_id;
+    this.player_id = args.player_id;
     this.bullet_pos = args.bullet_pos;
     this.bullet_vec = args.bullet_vec;
     this.weapon_id = args.weapon_id;
@@ -10,6 +11,10 @@ function Bullet(gameManager, args) {
 
 Bullet.prototype.get_id = function (){
     return this.bullet_id;
+}
+
+Bullet.prototype.get_player_id = function (){
+    return this.player_id;
 }
 
 Bullet.prototype.remove = function (){

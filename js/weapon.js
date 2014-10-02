@@ -1,5 +1,6 @@
 function Weapon(gameManager, opts) {
     this.gameManager = gameManager;
+    this.owner_id = opts.owner_id;
 }
 
 Weapon.prototype.getOwnerID = function(){
@@ -32,14 +33,14 @@ Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
 
     ds_bullet.send({
         bullet_id : bullet_id,
-        player_id : player_id,
+        player_id : self.owner_id,
         weapon_id : weapon_id,
         /* posで開始位置 */
         /* vecで方向 */
         pos : {
-            x : myself.getElem().positionX() + x/20,
-            y : myself.getElem().positionY() + y/20,
-            z : myself.getElem().positionZ() + z/20
+            x : Math.floor(myself.getElem().positionX()),
+            y : Math.floor(myself.getElem().positionY()),
+            z : Math.floor(myself.getElem().positionZ())
         },
         vec : {
             x : x,

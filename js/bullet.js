@@ -7,6 +7,7 @@ function Bullet(gameManager, args) {
     this.weapon_id = args.weapon_id;
     this.elem = null;
     this.damage = 10;
+    this.range = 4.2;
 }
 
 Bullet.prototype.get_id = function (){
@@ -33,37 +34,41 @@ Bullet.prototype.render_bullet = function (){
     var speed_coef = 1;
 
     self.damage = 10;
-    console.log(this.weapon_id);
     switch (this.weapon_id) {
         case "00001": // large gun
         bullet_shape = "3 3 3";
         range_coef = 0.7;
         speed_coef = 0.7;
         self.damage = 15;
+        self.range = 5;
         break;
         case "00002": // canon
         bullet_shape = "5 5 5";
         range_coef = 4;
         speed_coef = 0.3;
         self.damage = 30;
+        self.range = 7;
         break;
         case "00003": // magnum
         bullet_shape = "0.5 1 1";
         range_coef = 1;
         speed_coef = 1;
         self.damage = 50;
+        self.range = 4;
         break;
         case "00004": // mine
         bullet_shape = "15 15 15";
         range_coef = 10;
         speed_coef = 10;
         self.damage = 15;
+        self.range = 17;
         break;
         case "00005": // poison fog
         bullet_shape = "50 100 100";
         range_coef = 10;
         speed_coef = 10;
         self.damage = 5;
+        self.range = 27;
         break;
     }
 

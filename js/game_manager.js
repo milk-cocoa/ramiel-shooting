@@ -24,7 +24,7 @@ GameManager.prototype.check_hit = function(){
         var xx = self.myself.getElem().positionX() - bullet.elem.positionX();
         var yy = self.myself.getElem().positionY() - bullet.elem.positionY();
         var zz = self.myself.getElem().positionZ() - bullet.elem.positionZ();
-        if(xx * xx + yy * yy + zz * zz < 20 && self.myself.player_id != bullet.get_player_id()) {
+        if(xx * xx + yy * yy + zz * zz < bullet.range && self.myself.player_id != bullet.get_player_id()) {
             ViewManager.dec_hp(bullet.damage);
             if(Number($("#lifebar").width()) <= 0) {
                 self.is_gameover = true;

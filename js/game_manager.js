@@ -1,7 +1,8 @@
-function GameManager(ds, myself){
+function GameManager(ds, myself, stage){
     this.bullets = {};
     this.ds = ds;
     this.myself = myself;
+    this.stage = stage;
     this.is_gameover = false;
 }
 
@@ -24,7 +25,6 @@ GameManager.prototype.check_hit = function(){
         var yy = self.myself.getElem().positionY() - bullet.elem.positionY();
         var zz = self.myself.getElem().positionZ() - bullet.elem.positionZ();
         if(xx * xx + yy * yy + zz * zz < 20) {
-            console.log("aaa");
             ViewManager.dec_hp(bullet.damage);
             if(Number($("#lifebar").width()) <= 0) {
                 self.is_gameover = true;
@@ -32,6 +32,12 @@ GameManager.prototype.check_hit = function(){
                 alert("HPが0になりました。");
                 location.href = "/play.html";
             }
+        }
+        if(self.stage.check_collision({
+            x : bullet.elem.positionX(),
+            y : bullet.elem.positionY(),
+            z : bullet.elem.positionZ()})) {
+            bullet.remove();
         }
     });
 }

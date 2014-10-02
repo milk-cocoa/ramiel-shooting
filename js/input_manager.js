@@ -5,7 +5,10 @@ function InputManager(player){
     self.moveZ = 0;
     self.rotateY = 0;
     self.listeners = {
-        shoot : []
+        shoot : [],
+        move : [],
+        rotate : [],
+        jump : []
     }
     self.first = [];
     self.rat = {};
@@ -25,6 +28,7 @@ function InputManager(player){
             // case 82: /*R*/ speed += 1; break;
             // case 70: /*F*/ speed -= 1; break;
         case 32: self.emit_onshoot();break;
+        case 38: self.emit_onjump();break;
 
         }
     } ).keyup( function( e ) {
@@ -57,6 +61,18 @@ function InputManager(player){
     }
 }
 
+
+InputManager.prototype.update = function(delta) {
+    var moveSpeed = delta * 1 / 100;
+    var player_vec = this.getMoveVecor(moveSpeed);
+    if(this.moveX != 0 || this.moveZ != 0) {
+        this.emit_onmove(player_vec);
+    }
+    if(this.rotateY != 0) {
+        this.emit_onrotate(this.getRot(delta));
+    }
+}
+
 InputManager.prototype.init_orientation = function(e){
     this.first = [e.alpha, e.gamma, e.beta];
 }
@@ -70,7 +86,7 @@ InputManager.prototype.getMoveVecor = function(speed){
 }
 
 InputManager.prototype.getRot = function(delta){
-    return this.myself.getElem().rotateY() + delta*this.rotateY/1500;
+    return delta*this.rotateY/1500;
 }
 
 InputManager.prototype.on = function(event, cb){
@@ -83,10 +99,20 @@ InputManager.prototype.emit_onshoot = function(e){
     });
 }
 
-InputManager.prototype.setMyself = function(myself){
-    this.myself = myself;
+InputManager.prototype.emit_onjump = function(e){
+    this.listeners["jump"].forEach(function(listener) {
+        listener(e);
+    });
 }
 
-InputManager.prototype.setPlayer = function(player){
-    this.player = player;
+InputManager.prototype.emit_onmove = function(e){
+    this.listeners["move"].forEach(function(listener) {
+        listener(e);
+    });
+}
+
+InputManager.prototype.emit_onrotate = function(e){
+    this.listeners["rotate"].forEach(function(listener) {
+        listener(e);
+    });
 }

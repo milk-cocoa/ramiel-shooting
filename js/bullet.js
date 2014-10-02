@@ -12,6 +12,12 @@ Bullet.prototype.get_id = function (){
     return this.bullet_id;
 }
 
+Bullet.prototype.remove = function (){
+    var self = this;
+    self.gameManager.remove_bullet(self.get_id());
+    self.elem.remove();
+}
+
 Bullet.prototype.render_bullet = function (){
     var self = this;
 
@@ -69,8 +75,7 @@ Bullet.prototype.render_bullet = function (){
         positionZ : "+="+(self.bullet_vec.z)
     }, speed_and_range);
     setTimeout(function() {
-        self.gameManager.remove_bullet(self.get_id());
-        jThree("#" + self.get_id()).remove();
+        self.remove();
     }, range);
 
     self.elem = jThree("#" + self.get_id());

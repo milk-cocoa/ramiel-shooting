@@ -11,6 +11,9 @@
 
           <mtl id="bullet-mtl" type="MeshLambert" param="color: #e55;ambient: #e55;" />
 
+          <geo id="block" type="Cube" param="5 5 5" />
+          <mtl id="block-mtl" type="MeshLambert" param="color: #aaa;ambient: #aaa;" />
+
           <geo id="sky" type="Sphere" param="200 64 64" />
           <txr id="blueSky" src="data/img/sky.png" />
           <mtl id="sky-mtl" type="MeshPhong" param="map: #blueSky; side: 2;"/>
@@ -58,7 +61,7 @@
     <script src="js/player.js"></script>
     <script src="js/player_manager.js"></script>
     <script src="js/bullet.js"></script>
-    <script src="js/weapon.js"></script>
+    <script src="js/stage.js"></script>
     <script src="js/game_manager.js"></script>
     <script src="js/view_manager.js"></script>
     <script src="js/effect_manager.js"></script>

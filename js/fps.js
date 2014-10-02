@@ -1,7 +1,3 @@
-$(window).on('hashchange', function(){
-    location.reload();
-});
-
 jThree( function( j3 ) {//j3 === jThree
     var milkcocoa = new MilkCocoa("https://io-fi0i1mtqo.mlkcca.com:443");
     //io-li0guk7u1

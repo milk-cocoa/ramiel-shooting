@@ -1,0 +1,46 @@
+.chatparts {
+	z-index: 99;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 180px;
+	border: solid 1px #2980b9;
+}
+
+.chatparts-header {
+	width: 180px;
+	position: relative;
+	background: #2980b9;
+	color: white;
+	padding: 0px 2px;
+}
+
+.chatparts-title {
+	width: 150px;
+	float: left;
+}
+
+.chatparts-close {
+	width: 20px;
+	color: white;
+	cursor: pointer;
+}
+
+.chatparts-messages {
+	background: white;
+	clear: both;
+	height: 150px;
+	overflow:scroll;
+}
+
+.chatparts-messages-min {
+	background: white;
+	clear: both;
+	height: 0px;
+}
+
+
+.chatparts-textbox{
+	width: 178px;
+}
+

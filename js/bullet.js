@@ -51,13 +51,13 @@ Bullet.prototype.render_bullet = function (){
     case "00004": // mine
         range_coef = 10;
         speed_coef = 10;
-        self.damage = 10;
+        self.damage = 3;
         self.range = 15;
         break;
     case "00005": // jaming
         range_coef = 10;
         speed_coef = 10;
-        self.damage = 1;
+        self.damage = 0.2;
         self.range = 25;
         break;
     default:

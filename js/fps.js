@@ -1,6 +1,12 @@
 jThree( function( j3 ) {//j3 === jThree
-    var milkcocoa = new MilkCocoa("https://io-fi0i1mtqo.mlkcca.com:443");
-    //io-li0guk7u1
+    var appid = "io-fi0i1mtqo";
+    var milkcocoa = new MilkCocoa("https://" + appid + ".mlkcca.com:443");
+    chatpart.start({
+        host : "https://" + appid + ".mlkcca.com",
+        datastore  : "chat",
+        milkcocoa : milkcocoa
+    });
+    // io-li0guk7u1 //ramiel.mlkcca-app.com
     var ds = milkcocoa.dataStore("sample");
     var ds_bullet = milkcocoa.dataStore("bullet");
     var speed = 3;

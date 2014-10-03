@@ -15,7 +15,7 @@
             ds.query({}).done(function(e) {
                 for(var i=0;i < e.length;i++) {
                     if(!e[i].content) continue;
-                    $("#spc-messages").append('<div id="'+e[i].id+'">' + escapeHTML(e[i].content) + "</div>");
+                    $("#spc-messages").prepend('<div id="'+e[i].id+'">' + escapeHTML(e[i].content) + "</div>");
                 }
                 scroll_to_bottom();
             });

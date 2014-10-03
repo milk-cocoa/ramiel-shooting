@@ -26,49 +26,43 @@ Bullet.prototype.remove = function (){
 
 Bullet.prototype.render_bullet = function (){
     var self = this;
+    var range_coef;
+    var speed_coef;
 
-    /* 弾丸の形を定義する。デフォルトで1 1 1 */
-    /* 10 10 10だとでかい球体 */
-    var bullet_shape = "1 1 1";
-    var range_coef = 1;
-    var speed_coef = 1;
-
-    self.damage = 10;
     switch (this.weapon_id) {
-        case "00001": // large gun
-        bullet_shape = "2 2 2";
+    case "00001": // large gun
         range_coef = 0.7;
         speed_coef = 0.7;
-        self.damage = 15;
+        self.damage = 20;
         self.range = 2;
         break;
-        case "00002": // canon
-        bullet_shape = "3 3 3";
+    case "00002": // canon
         range_coef = 4;
         speed_coef = 0.3;
-        self.damage = 30;
+        self.damage = 15;
         self.range = 3;
         break;
-        case "00003": // magnum
-        bullet_shape = "0.5 1 1";
+    case "00003": // magnum
         range_coef = 1;
         speed_coef = 1;
-        self.damage = 50;
+        self.damage = 40;
         self.range = 1;
         break;
-        case "00004": // mine
-        bullet_shape = "15 15 15";
+    case "00004": // mine
         range_coef = 10;
         speed_coef = 10;
-        self.damage = 15;
+        self.damage = 10;
         self.range = 15;
         break;
-        case "00005": // poison fog
-        bullet_shape = "50 100 100";
+    case "00005": // jaming
         range_coef = 10;
         speed_coef = 10;
-        self.damage = 5;
+        self.damage = 1;
         self.range = 25;
+        break;
+    default:
+        range_coef = 1;
+        speed_coef = 1;
         break;
     }
 
@@ -77,7 +71,15 @@ Bullet.prototype.render_bullet = function (){
     /* この値が大きいと遠くまで届く */
     var range = 2000*range_coef;
 
-    jThree("scene").append('<obj id="'+self.bullet_id+'" style="rotateY: 0;"><mesh geo="#bullet'+this.weapon_id+'" mtl="#bullet-mtl" /></obj>');
+    if(this.weapon_id != "00005"){
+        jThree("scene").append('<obj id="'+self.bullet_id+'" style="rotateY: 0;"><mesh geo="#bullet'+this.weapon_id+'" mtl="#bullet-mtl" /></obj>');
+    } else {
+        //ジャミングエフェクト
+        //何故かundefinedな値をmtlに渡すとスケルトンになるので
+        //とりあえずそれで(ひどい)
+        var bullet_color_decoy;
+        jThree("scene").append('<obj id="'+self.bullet_id+'" style="rotateY: 0;"><mesh geo="#bullet'+this.weapon_id+'" mtl="#bullet-mtl' + bullet_color_decoy + '" /></obj>');
+    }
     jThree("#" + self.bullet_id).css("position", [ self.bullet_pos.x, self.bullet_pos.y, self.bullet_pos.z]);
     jThree("#" + self.bullet_id).animate({
         positionX : "+="+(self.bullet_vec.x),

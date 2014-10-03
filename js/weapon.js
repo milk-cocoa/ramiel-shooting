@@ -1,30 +1,39 @@
-function Weapon(gameManager, opts) {
-    this.gameManager = gameManager;
-    this.owner_id = opts.owner_id;
+function Weapon(player_id) {
+    this.player_id =player_id;
+    this.weapon_count = 0;
+    this.weapon_max = 5;
+    this.weapon_id = "00000";
 }
 
-Weapon.prototype.getOwnerID = function(){
-    return this.owner_id;
+Weapon.prototype.addWeaponCount = function(){
+    if (this.weapon_count < this.weapon_max){
+        this.weapon_count += 1;
+    } else {
+        this.weapon_count = 0;
+    }
+    var weapon_names = [
+        '通常弾',
+        '強化弾',
+        '砲弾',
+        'ライフル弾',
+        '遠方機雷',
+        '遠方ジャミング'
+    ];
+    switch(true){
+    case this.weapon_count <= this.weapon_max:
+        this.weapon_id = "0000" + this.weapon_count;
+        break;
+    default:
+        this.weapon_id = "00000";
+        break;
+    }
+    ViewManager.update_weapon(weapon_names[this.weapon_count]);
 }
 
-Weapon.prototype.setOwner = function(owner_id){
-    this.owner = owner_id;
-}
-
-Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
-    // [TODO]
-    // このへんの武器決定処理を
-    // コンストラクタに持って行きたい
+Weapon.prototype.fire = function(myself, ds_bullet) {
     var self = this;
 
     if(!ViewManager.dec_mp(10)) return;
-    var weapon_id = "00001";
-
-    /* とりあえずhash値で武器選択 */
-    var hash = decodeURI(location.hash.substr(1));
-    if (hash == "1" || hash == "2" || hash == "3" || hash == "4" || hash == "5") {
-        weapon_id = "0000" + hash;
-    }
 
     var bullet_id = new Date().getTime().toString(36);
     var x = -Math.cos(myself.getElem().rotateY() - Math.PI / 2) * 150;
@@ -33,8 +42,8 @@ Weapon.prototype.fire = function(myself, ds_bullet, player_id) {
 
     ds_bullet.send({
         bullet_id : bullet_id,
-        player_id : self.owner_id,
-        weapon_id : weapon_id,
+        player_id : this.player_id,
+        weapon_id : self.weapon_id,
         /* posで開始位置 */
         /* vecで方向 */
         pos : {

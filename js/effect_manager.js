@@ -9,6 +9,6 @@ EffectManager.render_move = function(myself) {
 
 EffectManager.natural_heal = function() {
     setInterval(function() {
-        ViewManager.inc_mp(11);
+        ViewManager.inc_mp(9);
     }, 500);
 }

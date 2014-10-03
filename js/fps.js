@@ -7,12 +7,11 @@ jThree( function( j3 ) {//j3 === jThree
     var stage = new Stage();
     stage.init();
     var player_id = new Date().getTime().toString(36);
-    var myself = new Myself(gameManager, player_id, stage);
+    var myself = new Myself(player_id, stage);
     var gameManager = new GameManager(ds, myself, stage);
     myself.setDataStore(ds);
     var ioManager = new InputManager();
 
-    myself.initWeapon();
     ioManager.on("shoot", function() {
         myself.shoot(ds_bullet);
     });
@@ -32,6 +31,12 @@ jThree( function( j3 ) {//j3 === jThree
     ioManager.on("jump", function() {
         myself.jump();
         myself.broadcast("pos");
+    });
+
+    weapon = new Weapon(player_id);
+    myself.initWeapon(weapon);
+    ioManager.on("weaponchange", function() {
+        weapon.addWeaponCount();
     });
 
     var userManager = new UserManager(milkcocoa.dataStore("users"));
@@ -60,6 +65,7 @@ jThree( function( j3 ) {//j3 === jThree
 
     /* 弾丸の発射後にレンダリングを命令:renderはbulletで */
     ds_bullet.on("send", function(e) {
+        // gameManagerの当たり判定で使うユーザー情報などを登録
         var bullet = gameManager.add_bullet({
             bullet_id : e.value.bullet_id,
             player_id : e.value.player_id,

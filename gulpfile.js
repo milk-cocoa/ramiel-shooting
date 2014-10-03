@@ -14,35 +14,11 @@ gulp.task('serve', function() {
     }));
 });
 
-gulp.task('all',function(){
+gulp.task('html-task',function(){
     gulp.src(['html/**/*.html'], {read : true})
     .pipe(plumber())
     .pipe(gulp.dest('exports/'))
-
-    gulp.run("js-task");
-
-    gulp.src(['css/**/*.css'], {read : true})
-    .pipe(plumber())
-    .pipe(gulp.dest('exports/css'))
-
-    gulp.src(['script/**/*.js'], {read : true})
-    .pipe(plumber())
-    .pipe(gulp.dest('exports/script'))
-
-    gulp.src(['plugin/**/*.js'], {read : true})
-    .pipe(plumber())
-    .pipe(gulp.dest('exports/plugin'))
-
-    gulp.src(['data/**/*.jpg'], {read : true})
-    .pipe(plumber())
-    .pipe(gulp.dest('exports/data'))
-
-    gulp.src(['data/**/*.png'], {read : true})
-    .pipe(plumber())
-    .pipe(gulp.dest('exports/data'))
-
 });
-
 
 gulp.task('js-task',function(){
     gulp.src(['js/**/*.js'], {read : true})
@@ -50,10 +26,42 @@ gulp.task('js-task',function(){
     .pipe(gulp.dest('exports/js'))
 });
 
-gulp.task('watch',function(){
-  gulp.watch('js/**/*.js',["js-task"]);
+gulp.task('css-task',function(){
+    gulp.src(['css/**/*.css'], {read : true})
+    .pipe(plumber())
+    .pipe(gulp.dest('exports/css'))
 });
 
+gulp.task('img-task',function(){
+    gulp.src(['data/**/*.png'], {read : true})
+    .pipe(plumber())
+    .pipe(gulp.dest('exports/data'))
+
+    gulp.src(['data/**/*.jpg'], {read : true})
+    .pipe(plumber())
+    .pipe(gulp.dest('exports/data'))
+});
+
+gulp.task('lib-task',function(){
+    gulp.src(['script/**/*.js'], {read : true})
+    .pipe(plumber())
+    .pipe(gulp.dest('exports/script'))
+
+    gulp.src(['plugin/**/*.js'], {read : true})
+    .pipe(plumber())
+    .pipe(gulp.dest('exports/plugin'))
+});
+
+gulp.task('watch',function(){
+  gulp.watch('html/**/*.html',["html-task"]);
+  gulp.watch('js/**/*.js',["js-task"]);
+  gulp.watch('ccs/**/*.css',["css-task"]);
+  gulp.watch('data/**/*.png',["img-task"]);
+  gulp.watch('data/**/*.jpg',["img-task"]);
+  gulp.watch('script/**/*.js',["lib-task"]);
+  gulp.watch('plugin/**/*.js',["lib-task"]);
+});
 
 gulp.task('default', ['all', 'serve', 'watch']);
 
+gulp.task('all', ['html-task', 'js-task', 'css-task', 'img-task', 'lib-task']);

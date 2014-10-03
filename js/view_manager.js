@@ -5,6 +5,10 @@ ViewManager.update_alives = function(players){
     $("#alives").html("生存者" + Object.keys(players).length);
 }
 
+ViewManager.update_weapon = function(weapon_name){
+    $("#weapons").html("武器:" + weapon_name);
+}
+
 ViewManager.dec_hp = function(amount){
     $("#lifebar").width(Number($("#lifebar").width()) - amount);
 }

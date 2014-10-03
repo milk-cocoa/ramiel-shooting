@@ -6,7 +6,7 @@ body {
 }
 .statuspanel{
     background-color: rgba(0,0,0,0.7);
-    height: 128px;
+    height: 148px;
     width: 210px;
     position: absolute;
     top: 0;
@@ -49,6 +49,19 @@ body {
     width: 128px;
     position: absolute;
     top: 0;
+    right: 0;
+    padding: 0 0 0 10px;
+}
+.weapons {
+    line-height: 56px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    background-color: rgba(0,0,0,0.7);
+    height: 56px;
+    width: 128px;
+    position: absolute;
+    top: 56px;
     right: 0;
     padding: 0 0 0 10px;
 }

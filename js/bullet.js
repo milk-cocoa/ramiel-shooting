@@ -28,42 +28,18 @@ Bullet.prototype.render_bullet = function (){
     var self = this;
     var range_coef;
     var speed_coef;
+    var mp = 10;
 
-    switch (this.weapon_id) {
-    case "00001": // large gun
-        range_coef = 0.7;
-        speed_coef = 0.7;
-        self.damage = 20;
-        self.range = 2;
-        break;
-    case "00002": // canon
-        range_coef = 4;
-        speed_coef = 0.3;
-        self.damage = 15;
-        self.range = 3;
-        break;
-    case "00003": // magnum
+    var meta_weapon = Weapons[this.weapon_id];
+    if(meta_weapon) {
+        range_coef = meta_weapon.range_coef;
+        speed_coef = meta_weapon.speed_coef;
+        self.damage = meta_weapon.damage;
+        mp = meta_weapon.mp;
+    }else{
         range_coef = 1;
         speed_coef = 1;
-        self.damage = 40;
-        self.range = 1;
-        break;
-    case "00004": // mine
-        range_coef = 10;
-        speed_coef = 10;
-        self.damage = 3;
-        self.range = 15;
-        break;
-    case "00005": // jaming
-        range_coef = 10;
-        speed_coef = 10;
-        self.damage = 0.2;
-        self.range = 25;
-        break;
-    default:
-        range_coef = 1;
-        speed_coef = 1;
-        break;
+        mp = meta_weapon.mp;
     }
 
     /* この値が大きいと近くて遅い */

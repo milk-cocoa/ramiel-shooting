@@ -33,7 +33,10 @@ Weapon.prototype.addWeaponCount = function(){
 Weapon.prototype.fire = function(myself, ds_bullet) {
     var self = this;
 
-    if(!ViewManager.dec_mp(10)) return;
+    console.log(this.weapon_id);
+    var meta_weapon = Weapons[this.weapon_id];
+
+    if(!ViewManager.dec_mp(meta_weapon.mp)) return;
 
     var bullet_id = new Date().getTime().toString(36);
     var x = -Math.cos(myself.getElem().rotateY() - Math.PI / 2) * 150;

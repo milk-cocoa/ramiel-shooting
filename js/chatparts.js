@@ -1,5 +1,5 @@
 (function(){
-    var html = '<div class="chatparts-header"><p class="chatparts-title">[chat]</p><a id="spc-close" class="chatparts-close">-</a></div><div id="spc-message-area" class="chatparts-messages"><div id="spc-messages"></div></div>';
+    var html = '<div class="chatparts-header"><p class="chatparts-title">[chat]</p><a id="spc-close" class="chatparts-close"></a></div><div id="spc-message-area" class="chatparts-messages"><div id="spc-messages"></div></div>';
     function escapeHTML(str) {return str.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");}
     window.chatpart = {
         start : function(_option) {

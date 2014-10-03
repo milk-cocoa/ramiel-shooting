@@ -31,11 +31,19 @@
             $('#spc-content').keydown(function (e) {
                 if (e.which == 13){
                     ds.push({
-                        content : escapeHTML($("#spc-content").val())
+                      content : escapeHTML($("#spc-content").val())
                     });
                     $("#spc-content").val("");
                     $("#spc-content").blur();
-                    return false;
+                    e.stopPropagation();
+                }
+            });
+            $(document).keydown(function(e){
+                if (e.which == 13){
+                  if(!$("#spc-content").is(':focus')){
+                      $("#spc-content").focus();
+                  };
+                  e.stopPropagation();
                 }
             });
             var close_ele = document.getElementById("spc-close");

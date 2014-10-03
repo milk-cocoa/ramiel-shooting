@@ -7,7 +7,7 @@ function Bullet(gameManager, args) {
     this.weapon_id = args.weapon_id;
     this.elem = null;
     this.damage = 10;
-    this.range = 4.2;
+    this.size = 1;
 }
 
 Bullet.prototype.get_id = function (){
@@ -36,6 +36,7 @@ Bullet.prototype.render_bullet = function (){
         speed_coef = meta_weapon.speed_coef;
         self.damage = meta_weapon.damage;
         mp = meta_weapon.mp;
+        this.size = meta_weapon.size;
     }else{
         range_coef = 1;
         speed_coef = 1;

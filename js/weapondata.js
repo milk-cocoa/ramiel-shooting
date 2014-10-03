@@ -4,42 +4,43 @@
 	    	range_coef : 1,
 	    	speed_coef : 1,
 	    	damage : 10,
-	    	range : 4.2,
+	    	size : 1,
 	    	mp : 10
     	},
     	"00001" : {
 	    	range_coef : 0.7,
 	    	speed_coef : 0.7,
 	    	damage : 20,
-	    	range : 2,
+	    	size : 1.3,
 	    	mp : 25
     	},
     	"00002" : {
 	    	range_coef : 4,
 	    	speed_coef : 0.3,
 	    	damage : 15,
-	    	range : 3,
+	    	size : 4,
 	    	mp : 15
     	},
     	"00003" : {
 	    	range_coef : 1,
 	    	speed_coef : 1,
 	    	damage : 40,
-	    	range : 1,
+	    	size : 1,
 	    	mp : 15
     	},
     	"00004" : {
 	    	range_coef : 10,
 	    	speed_coef : 10,
 	    	damage : 3,
-	    	range : 15,
+	    	size : 6,
 	    	mp : 20
     	},
     	"00005" : {
-	    	range_coef : 10,
-	    	speed_coef : 10,
+	    	range_coef : 12,
+	    	speed_coef : 12,
 	    	damage : 1,
-	    	range : 40,
+	    	size : 20,
+            // 20 20 20の弾に最適
 	    	mp : 32
     	}
 	}

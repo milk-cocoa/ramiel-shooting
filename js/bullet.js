@@ -33,7 +33,7 @@ Bullet.prototype.render_bullet = function (){
     case "00001": // large gun
         range_coef = 0.7;
         speed_coef = 0.7;
-        self.damage = 20;
+        self.damage = 30;
         self.range = 2;
         break;
     case "00002": // canon
@@ -57,7 +57,7 @@ Bullet.prototype.render_bullet = function (){
     case "00005": // jaming
         range_coef = 10;
         speed_coef = 10;
-        self.damage = 0.2;
+        self.damage = 1;
         self.range = 25;
         break;
     default:

@@ -34,6 +34,7 @@
                         content : escapeHTML($("#spc-content").val())
                     });
                     $("#spc-content").val("");
+                    $("#spc-content").blur();
                     return false;
                 }
             });

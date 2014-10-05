@@ -42,6 +42,13 @@
 	    	size : 20,
             // 20 20 20の弾に最適
 	    	mp : 32
+    	},
+    	"00006" : {
+	    	range_coef : 1,
+	    	speed_coef : 4,
+	    	damage : 2,
+	    	size : 1,
+	    	mp : 2
     	}
 	}
 }(window))

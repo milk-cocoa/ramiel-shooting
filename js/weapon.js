@@ -1,7 +1,7 @@
 function Weapon(player_id) {
     this.player_id =player_id;
     this.weapon_count = 0;
-    this.weapon_max = 5;
+    this.weapon_max = 6;
     this.weapon_id = "00000";
 }
 
@@ -17,7 +17,8 @@ Weapon.prototype.addWeaponCount = function(){
         '砲弾',
         'ライフル弾',
         '遠方機雷',
-        '遠方ジャミング'
+        '遠方ジャミング',
+        'ゴム弾'
     ];
     switch(true){
     case this.weapon_count <= this.weapon_max:

@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="css/style.css" type="text/css" />
     <link rel="stylesheet" href="css/lp.css" type="text/css" />
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <style>
+    .ranking {
+    	width: 50%;
+    	margin: 32px auto;
+    }
+    </style>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://cdn.mlkcca.com/v0.2.8/milkcocoa.js"></script>
     <script src="js/score.js"></script>
@@ -21,9 +27,11 @@
       var milkcocoa = new MilkCocoa("https://" + appid + ".mlkcca.com:443");
       var scoreManager = new ScoreManager(milkcocoa.dataStore("users"));
       scoreManager.fetch(function(err, scores) {
-        scores.forEach(function(s) {
-          $("#scores").append('<div><div>'+s.name + "</div><div>" + s.win+'</div></div>');
+        $("#scores").empty().append("<table>");
+        scores.map(function(s, rank) {
+        	$("#scores").append('<tr><td>'+ (rank + 1) + '位</td><td><strong>'+s.name + '</strong></td><td>' + s.win+'</td></tr></table>');
         });
+        $("#scores").append("</table>");
       });
       var userManager = new UserManager(milkcocoa.dataStore("users"));
       userManager.init(function(err, user) {
@@ -39,7 +47,10 @@
     </script>
 </head>
 <body>
-	<span>名前</span><input id="name" type="text"></input>
-	<div id="scores"></div>
+	<div class="ranking">
+		<h1>スコアランキング</h1>
+		<span>名前を設定してください。</span><input id="name" type="text"></input>
+		<div id="scores"></div>
+	</div>
 </body>
 </html>

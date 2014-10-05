@@ -127,7 +127,7 @@ Myself.prototype.shoot = function(ds_bullet) {
 Myself.prototype.jump = function() {
     if(this._is_onfloor) {
         this._is_onfloor = false;
-        this.vy = 1.6;
+        this.vy = 1.5;
     }
 }
 

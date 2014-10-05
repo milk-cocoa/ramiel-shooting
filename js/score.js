@@ -3,7 +3,7 @@
         this.ds = ds;
     }
     ScoreManager.prototype.fetch = function(cb) {
-        this.ds.query({}).sort("desc").limit(100).done(function(users) {
+        this.ds.query({}).sort("desc").limit(10).done(function(users) {
             cb(null, users);
         });
     }

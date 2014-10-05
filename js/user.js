@@ -3,13 +3,23 @@
 		this.ds = ds;
 		this.user = null;
 	}
-	UserManager.prototype.init = function() {
+	UserManager.prototype.init = function(cb) {
+		var self = this;
 		var user = this.get_current();
 		if(!user) {
 			user = this.create_user();
 		}
 		this.ds.get(user.id, function(data) {
-			self.user = data;
+			if(data) {
+				self.user = data;
+			}else{
+				self.user = {
+					win : 0,
+					lose : 0,
+					name : ""
+				}
+			}
+			cb(null, self.user);
 		});
 	}
 	UserManager.prototype.create_user = function() {
@@ -18,7 +28,7 @@
 			win : 0,
 			lose : 0
 		};
-		localStorage.setItem("user", JSON.stringify(user));
+		localStorage.setItem("ramiel.userid", JSON.stringify(user));
 		this.ds.set(user.id, {
 			win : 0,
 			lose : 0
@@ -26,7 +36,7 @@
 		return user;
 	}
 	UserManager.prototype.get_current = function() {
-		var user = localStorage.getItem("user");
+		var user = localStorage.getItem("ramiel.userid");
 		if(user) {
 			return JSON.parse(user);
 		}else{
@@ -42,14 +52,16 @@
 		}
 	}
 	UserManager.prototype.update_score = function(win, lose) {
+		var self = this;
 		var user = this.get_current();
+		console.log(win, lose, user, this.user);
 		if(user && this.user) {
 			var new_win = Number(this.user.win) + Number(win);
 			this.ds.set(user.id, {
 				win : new_win,
 				lose : Number(this.user.lose) + Number(lose)
 			}, function() {
-				this.ds.setPriority(user.id, new_win);
+				self.ds.setPriority(user.id, new_win);
 			});
 		}
 	}

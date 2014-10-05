@@ -113,10 +113,11 @@ Myself.prototype.broadcast = function(type) {
     this.prev.z = this.getElem().positionZ();
 }
 
-Myself.prototype.gameover = function() {
+Myself.prototype.gameover = function(bullet_owner_id) {
     this.ds.send({
         cmd : "gameover",
-        player_id : this.player_id
+        player_id : this.player_id,
+        killer_id : bullet_owner_id
     });
 }
 

@@ -49,10 +49,7 @@ jThree( function( j3 ) {//j3 === jThree
     var userManager = new UserManager(milkcocoa.dataStore("users"));
     var scoreManager = new ScoreManager(milkcocoa.dataStore("users"));
     userManager.init();
-    scoreManager.fetch(function(err, scores) {
-        //console.log(scores);
-    });
-
+    
     j3( "rdr" ).update( function( delta ) {
         ioManager.update(delta);
         gameManager.check_hit();
@@ -65,8 +62,11 @@ jThree( function( j3 ) {//j3 === jThree
     player_manager.on("update", function(players) {
         ViewManager.update_alives(players);
     });
-    player_manager.on("gameover", function(players) {
-        ViewManager.update_alives(players);
+    player_manager.on("gameover", function(e) {
+        ViewManager.update_alives(e.players);
+        if(myself.player_id == e.killer_id) {
+            userManager.update_score(1, 0);
+        }
     });
     player_manager.observe(player_id);
 

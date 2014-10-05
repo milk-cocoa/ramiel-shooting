@@ -49,7 +49,10 @@ PlayerManager.prototype.observe = function(player_id) {
             if(self.players[e.value.player_id]) {
                 self.players[e.value.player_id].vanish();
                 delete self.players[e.value.player_id];
-                self.emit_ongameover(self.players);
+                self.emit_ongameover({
+                    players : self.players,
+                    killer_id : e.value.killer_id
+                });
             }
         }
     });

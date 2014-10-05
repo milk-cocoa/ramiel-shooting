@@ -8,9 +8,9 @@
 	    	mp : 10
     	},
     	"00001" : {
-	    	range_coef : 0.7,
-	    	speed_coef : 0.7,
-	    	damage : 20,
+	    	range_coef : 0.3,
+	    	speed_coef : 0.3,
+	    	damage : 50,
 	    	size : 1.3,
 	    	mp : 25
     	},
@@ -29,15 +29,15 @@
 	    	mp : 15
     	},
     	"00004" : {
-	    	range_coef : 10,
-	    	speed_coef : 10,
+	    	range_coef : 6,
+	    	speed_coef : 6,
 	    	damage : 3,
 	    	size : 6,
 	    	mp : 20
     	},
     	"00005" : {
-	    	range_coef : 12,
-	    	speed_coef : 12,
+	    	range_coef : 8,
+	    	speed_coef : 8,
 	    	damage : 1,
 	    	size : 20,
             // 20 20 20の弾に最適
@@ -46,9 +46,9 @@
     	"00006" : {
 	    	range_coef : 1,
 	    	speed_coef : 4,
-	    	damage : 2,
+	    	damage : 4,
 	    	size : 1,
-	    	mp : 2
+	    	mp : 1
     	}
 	}
 }(window))

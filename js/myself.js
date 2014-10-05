@@ -15,10 +15,6 @@ function Myself(player_id, stage) {
         y : -30,
         z : 10
     }, {
-        x : 9,
-        y : -30,
-        z : 99
-    }, {
         x : 141,
         y : -30,
         z : 67
@@ -31,7 +27,7 @@ function Myself(player_id, stage) {
         y : -10,
         z : 37
     }];
-    var index = Math.floor(Math.random() * 100) % 5
+    var index = Math.floor(Math.random() * 100) % 4;
     this.elem.css("position", [points[index].x, points[index].y, points[index].z]);
 }
 
@@ -125,7 +121,6 @@ Myself.prototype.gameover = function() {
 }
 
 Myself.prototype.shoot = function(ds_bullet) {
-    console.log(this.elem.position());
     this.weapon.fire(this, ds_bullet);
 }
 

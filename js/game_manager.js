@@ -20,6 +20,7 @@ GameManager.prototype.check_hit = function(){
     var self = this;
     if(self.is_gameover) return;
     Object.keys(self.bullets).map(function(key) {
+        if(self.is_gameover) return;
         var bullet = self.bullets[key];
         var xx = self.myself.getElem().positionX() - bullet.elem.positionX();
         var yy = self.myself.getElem().positionY() - bullet.elem.positionY();

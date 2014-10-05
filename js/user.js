@@ -5,63 +5,54 @@
 	}
 	UserManager.prototype.init = function(cb) {
 		var self = this;
-		var user = this.get_current();
-		if(!user) {
-			user = this.create_user();
-		}
-		this.ds.get(user.id, function(data) {
-			if(data) {
+		var user_id = this.get_current();
+		if(user_id) {
+			this.ds.get(user_id, function(data) {
 				self.user = data;
-			}else{
-				self.user = {
-					win : 0,
-					lose : 0,
-					name : ""
-				}
-			}
+				cb(null, self.user);
+			});
+		}else{
+			self.user = this.create_user();
 			cb(null, self.user);
-		});
+		}
 	}
 	UserManager.prototype.create_user = function() {
+		var user_id = new Date().getTime().toString(36) + ((Math.random() * 100000) >> 0);
 		var user = {
-			id : new Date().getTime().toString(36) + ((Math.random() * 100000) >> 0),
 			win : 0,
-			lose : 0
+			lose : 0,
+			name : "名無し"
 		};
-		localStorage.setItem("ramiel.userid", JSON.stringify(user));
-		this.ds.set(user.id, {
-			win : 0,
-			lose : 0
-		});
+		localStorage.setItem("ramiel.user.id", user_id);
+		this.ds.set(user_id, user);
 		return user;
 	}
 	UserManager.prototype.get_current = function() {
-		var user = localStorage.getItem("ramiel.userid");
-		if(user) {
-			return JSON.parse(user);
+		var user_id = localStorage.getItem("ramiel.user.id");
+		if(user_id) {
+			return user_id;
 		}else{
 			return null;
 		}
 	}
 	UserManager.prototype.set_name = function(name) {
-		var user = this.get_current();
-		if(user && this.user) {
-			this.ds.set(user.id, {
+		var user_id = this.get_current();
+		if(user_id && this.user) {
+			this.ds.set(user_id, {
 				name : name
 			});
 		}
 	}
 	UserManager.prototype.update_score = function(win, lose) {
 		var self = this;
-		var user = this.get_current();
-		console.log(win, lose, user, this.user);
-		if(user && this.user) {
+		var user_id = this.get_current();
+		if(user_id && this.user) {
 			var new_win = Number(this.user.win) + Number(win);
-			this.ds.set(user.id, {
+			this.ds.set(user_id, {
 				win : new_win,
 				lose : Number(this.user.lose) + Number(lose)
 			}, function() {
-				self.ds.setPriority(user.id, new_win);
+				self.ds.setPriority(user_id, new_win);
 			});
 		}
 	}

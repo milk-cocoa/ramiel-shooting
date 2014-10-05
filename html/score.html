@@ -22,7 +22,7 @@
       var scoreManager = new ScoreManager(milkcocoa.dataStore("users"));
       scoreManager.fetch(function(err, scores) {
         scores.forEach(function(s) {
-          $("#scores").append('<div>'+s.name + ":" + s.win+'</div>');
+          $("#scores").append('<div><div>'+s.name + "</div><div>" + s.win+'</div></div>');
         });
       });
       var userManager = new UserManager(milkcocoa.dataStore("users"));

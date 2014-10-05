@@ -9,28 +9,7 @@
     <link rel="stylesheet" href="css/lp.css" type="text/css" />
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat:400,700">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="http://cdn.mlkcca.com/v0.2.8/milkcocoa.js"></script>
-    <script src="js/score.js"></script>
-    <script src="js/user.js"></script>
     <script src="js/lp.min.js"></script>
-    <script>
-    $(function() {
-      var appid = "io-fi0i1mtqo";
-      // io-fi0i1mtqo //jthreefps.mlkcca-app.com
-      // io-li0guk7u1 //ramiel.mlkcca-app.com
-      var milkcocoa = new MilkCocoa("https://" + appid + ".mlkcca.com:443");
-      var scoreManager = new ScoreManager(milkcocoa.dataStore("users"));
-      scoreManager.fetch(function(err, scores) {
-        scores.forEach(function(s) {
-          $("#scores").append('<div>'+s.win+'</div>');
-        });
-      });
-      var userManager = new UserManager(milkcocoa.dataStore("users"));
-      userManager.init(function() {
-        userManager.set_name(name);
-      });
-    });
-    </script>
 </head>
 <body>
     <div id="LP">
@@ -45,6 +24,5 @@
 
         <a class="p-lp__form__button" href="play.html">PLAY GAME</a>
   </div><!-- #LP -->
-        <div id="scores"></div>
 </body>
 </html>

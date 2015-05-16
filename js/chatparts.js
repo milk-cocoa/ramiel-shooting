@@ -4,7 +4,7 @@
     window.chatpart = {
         start : function(_option) {
             var option = _option || {};
-            var host = option.host || "https://io-ehz546bne.mlkcca.com";
+            var host = option.host || "dogi9jz8c16.mlkcca.com";
             var datastore = option.datastore || "messages";
             var ele = document.createElement("div");
             ele.innerHTML = html;
@@ -12,10 +12,10 @@
             $('#chatarea').append(ele);
             var milkcocoa = option.milkcocoa;
             var ds = milkcocoa.dataStore(datastore);
-            ds.query({}).done(function(e) {
-                for(var i=0;i < e.length;i++) {
-                    if(!e[i].content) continue;
-                    $("#spc-messages").prepend('<div id="'+e[i].id+'">' + escapeHTML(e[i].content) + "</div>");
+            ds.stream().next(function(err, docs) {
+                for(var i=0;i < docs.length;i++) {
+                    if(!docs[i].value.content) continue;
+                    $("#spc-messages").prepend('<div id="'+docs[i].id+'">' + escapeHTML(docs[i].value.content) + "</div>");
                 }
                 scroll_to_bottom();
             });

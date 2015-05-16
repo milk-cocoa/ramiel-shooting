@@ -1,10 +1,10 @@
 jThree( function( j3 ) {//j3 === jThree
-    var appid = "io-fi0i1mtqo";
+    var appid = "dogi9jz8c16";
     // io-fi0i1mtqo //jthreefps.mlkcca-app.com
     // io-li0guk7u1 //ramiel.mlkcca-app.com
-    var milkcocoa = new MilkCocoa("https://" + appid + ".mlkcca.com:443");
+    var milkcocoa = new MilkCocoa(appid + ".mlkcca.com");
     chatpart.start({
-        host : "https://" + appid + ".mlkcca.com",
+        host :  appid + ".mlkcca.com",
         datastore  : "chat",
         milkcocoa : milkcocoa
     });

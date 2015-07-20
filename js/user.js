@@ -3,7 +3,8 @@
 		this.ds = ds;
 		this.user = null;
 	}
-	UserManager.prototype.init = function(cb) {
+	UserManager.prototype.init = function(_cb) {
+		var cb = _cb || nop;
 		var self = this;
 		var user_id = this.get_current();
 		if(user_id) {
@@ -56,5 +57,6 @@
 			});
 		}
 	}
+	function nop(){}
 	global.UserManager = UserManager;
 }(window))

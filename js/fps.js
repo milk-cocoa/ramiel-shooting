@@ -1,15 +1,15 @@
 jThree( function( j3 ) {//j3 === jThree
-    var appid = "dogi9jz8c16";
+    var appid = "flagi9edsvtg";
     // io-fi0i1mtqo //jthreefps.mlkcca-app.com
     // io-li0guk7u1 //ramiel.mlkcca-app.com
     var milkcocoa = new MilkCocoa(appid + ".mlkcca.com");
     chatpart.start({
         host :  appid + ".mlkcca.com",
-        datastore  : "chat",
+        datastore  : "message",
         milkcocoa : milkcocoa
     });
-    var ds = milkcocoa.dataStore("sample");
-    var ds_bullet = milkcocoa.dataStore("bullet");
+    var ds = milkcocoa.dataStore("fps");
+    var ds_bullet = ds.child("bullet");
     var speed = 3;
     var stage = new Stage();
     stage.init();
@@ -46,8 +46,8 @@ jThree( function( j3 ) {//j3 === jThree
         weapon.addWeaponCount();
     });
 
-    var userManager = new UserManager(milkcocoa.dataStore("users"));
-    var scoreManager = new ScoreManager(milkcocoa.dataStore("users"));
+    var userManager = new UserManager(ds.child("users"));
+    var scoreManager = new ScoreManager(ds.child("users"));
     userManager.init();
     
     j3( "rdr" ).update( function( delta ) {

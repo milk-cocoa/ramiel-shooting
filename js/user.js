@@ -9,11 +9,11 @@
 		if(user_id) {
 			this.ds.get(user_id, function(data) {
 				self.user = data;
-				cb(null, self.user);
+				if(cb) cb(null, self.user);
 			});
 		}else{
 			self.user = this.create_user();
-			cb(null, self.user);
+			if(cb) cb(null, self.user);
 		}
 	}
 	UserManager.prototype.create_user = function() {
